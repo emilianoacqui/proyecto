@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scuola Italiana - Campus Interactivo</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      font-family: sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Estilos del mapa interactivo */
+    .mapa-container {
+      position: relative;
+      max-width: 1000px;
+      width: 100%;
+      margin: 20px auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #222;
+    }
+
+    .mapa-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .punto {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background-color: white;
+      color: black;
+      border-radius: 50%;
+      font-weight: bold;
+      text-align: center;
+      line-height: 30px;
+      cursor: pointer;
+      border: 2px solid #444;
+      transition: transform 0.2s;
+      z-index: 10;
+    }
+
+    .punto:hover {
+      transform: scale(1.2);
+    }
+    /* 🎠 Carrusel */
+.carousel-container {
+  left: -50px;
+  top: 3000px;
+  position: relative;
+  width: 776px;
+  height: 436px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-track img {
+  width: 776px;
+  height: 436px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.carousel-btn img {
+  width: 40px;
+  height: 40px;
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+
+.carousel-btn.right {
+  right: 10px;
+}
+
+
+    .infoPanel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 350px;
+      height: 100%;
+      background-color: #222;
+      color: white;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.7);
+      transition: right 0.4s ease;
+      overflow-y: auto;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .infoPanel.active {
+      right: 0;
+    }
+
+    .infoPanel img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .infoPanel .closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #444;
+      border: none;
+      color: white;
+      font-size: 18px;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .infoPanel .content {
+      font-size: 15px;
+      line-height: 1.4em;
+    }
+  </style>
+</head>
+<body>
+
+<div style="width: 1440px; height: 4417px; position: relative; background: white; overflow: hidden">
+  <div style="width: 211px; height: 48px; left: 159px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Bienvenudo a Scuola Italiana</div>
+  <div style="width: 193px; height: 48px; left: 385px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Nuestra Mision e Historia</div>
+  <div style="width: 93px; height: 48px; left: 1188px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Carreras</div>
+  <div style="width: 249px; height: 48px; left: 593px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Liderazgo y Vision estrategica</div>
+  <div style="width: 315px; height: 48px; left: 857px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Nuestro personal docente y administrativo</div>
+  <div style="width: 211px; height: 48px; left: 159px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Explora nuestro campus</div>
+  <div style="width: 193px; height: 48px; left: 385px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Voces de la comunidad</div>
+  <div style="width: 140px; height: 48px; left: 1141px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Calendario escolar</div>
+  <div style="width: 264px; height: 48px; left: 616px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Equidad y participacion comunitaria</div>
+  <div style="width: 315px; height: 48px; left: 857px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Verano en Scuola Italiana</div>
+  <div style="width: 885px; height: 20px; left: 243px; top: 1123px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #2E2C6B; font-size: 64px; font-family: Ruwudu; font-weight: 600; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Explore Our Campus</div>
+  <div style="width: 1151px; height: 0px; left: 144px; top: 1017px; position: absolute; outline: 1px #716E6E solid; outline-offset: -0.50px"></div>
+  <div style="width: 767px; left: 302px; top: 1231px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #041E42; font-size: 16px; font-family: Crimson Pro; font-weight: 700; line-height: 25px; letter-spacing: 0.50px; word-wrap: break-word">Kent Denver's scenic, 200-acre campus supports more than 200,000 square feet of state-of-the-art academic, arts and athletic facilities. Our wide-open spaces also include a Tiny Farm, two reservoirs, 1,600+ trees, a thriving wetlands and easy access to the High Line Canal Trail. </div>
+  <img style="width: 1440px; height: 408px; left: 0px; top: 4009px; position: absolute" src="fotos/footer.png" />
+  <div style="width: 1410px; height: 1000px; left: 13px; top: 1614px; position: absolute; background: #453D3D">
+    <!-- MAPA INTERACTIVO INTEGRADO EN EL ÁREA GRIS -->
+    <div style="width: 1200px; left: 105px; top: 50px; position: relative;">
+      <div class="mapa-container">
+        <img src="fotos/scuola.jpg" alt="Mapa de la escuela" />
+
+        <!-- Puntos interactivos -->
+        <div class="punto" style="top: 12%; left: 40%;" onclick="mostrarInfo('fotos/scuolaclub.jpg', `Scuola Club ofrece a su comunidad educativa acceso a canchas de tenis, canchas de césped sintético, clases de gimnasia, un Club House para celebraciones y una colonia de vacaciones con actividades guiadas.
+
+Los alumnos pueden acceder a 30 becas completas para aprender y practicar tenis. Además, existen bonificaciones especiales para alumnos, socios, funcionarios y miembros de la comunidad en:
+
+Alquiler de salón, terraza y parrillero exterior
+Alquiler de canchas de tenis
+Cuota mensual como socio de tenis
+Invitación por partido
+Alquiler de cancha de césped sintético
+Clases grupales de tenis
+
+Contacto:
+✉ scuolaclub2019@gmail.com
+📞 (+598) 099 866 684`)">+</div>
+
+        <div class="punto" style="top: 26%; left: 50%;" onclick="mostrarInfo('fotos/poli.jpg', `El colegio cuenta con un polideportivo moderno y funcional, destinado a la realización de actividades deportivas, recreativas y eventos institucionales.
+
+El espacio está equipado para la práctica de diversos deportes como voleibol, básquetbol, handball, fútbol y gimnasia. También se utiliza para clases de educación física, encuentros deportivos, actividades integradoras y celebraciones escolares.
+
+El polideportivo está disponible durante el horario escolar y, en determinados casos, también puede utilizarse fuera del horario habitual con autorización previa.
+
+Es un lugar de encuentro, formación y disfrute para todos los niveles del colegio, promoviendo el trabajo en equipo, la vida activa y los valores del deporte.
+
+Por consultas y mayor información:
+✉ contacto@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 40%; left: 20%;" onclick="mostrarInfo('fotos/bachi.jpg', `Bachillerato del Colegio
+
+El colegio ofrece un bachillerato completo que combina formación académica sólida con el desarrollo personal de los estudiantes, preparándolos tanto para estudios terciarios como para su integración activa en la sociedad.
+
+Nuestros grupos de bachillerato trabajan en un ambiente de compromiso, responsabilidad y colaboración, participando en proyectos interdisciplinarios, actividades institucionales y propuestas que promueven la autonomía.
+
+Se destaca especialmente el grupo de BT3, por su compromiso constante, su iniciativa en los desafíos propuestos y su participación activa en la vida del colegio. Su desempeño ha sido motivo de reconocimiento dentro de nuestra comunidad educativa.
+
+Por consultas y mayor información:
+✉ secundaria@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 30%; left: 20%;" onclick="mostrarInfo('fotos/estacionamiento.jpg', `Estacionamiento del Colegio
+
+El colegio cuenta con un espacio de estacionamiento disponible para alumnos, funcionarios y familias de la comunidad educativa.
+
+El estacionamiento está ubicado dentro del predio del colegio y cuenta con sectores diferenciados para automóviles, motos y bicicletas. Su uso está pensado para facilitar el acceso seguro y ordenado durante las entradas y salidas escolares.
+
+El ingreso al estacionamiento se realiza por la entrada principal del colegio y está habilitado únicamente en horario escolar. El uso del espacio es gratuito y exclusivo para miembros de la institución.
+
+Por consultas y mayor información:
+✉ contacto@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 65%; left: 47%;" onclick="mostrarInfo('fotos/BBSIM.jpg', `La sección inicial del colegio está especialmente diseñada para niños y niñas de hasta 6 años, brindando un entorno seguro, cálido y estimulante donde comienzan sus primeros pasos en el ámbito educativo.
+
+A través de propuestas lúdicas, artísticas y sensoriales, los más pequeños desarrollan sus capacidades cognitivas, emocionales y sociales en un espacio pensado para su edad. Las actividades se enfocan en la exploración, el juego, la expresión y el vínculo afectivo con sus docentes y compañeros.
+
+El equipo docente acompaña de forma cercana cada etapa, promoviendo la autonomía, la curiosidad y el aprendizaje significativo desde los primeros años.
+
+Por consultas y mayor información:
+✉ inicial@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 43%; left: 46%;" onclick="mostrarInfo('fotos/nuestro-colegio.jpg', `2. Scuola italiana di montevideo
+La Scuola Italiana es una institución educativa bilingüe que acompaña el recorrido académico y personal de sus estudiantes desde los primeros años hasta el egreso de bachillerato. Su propuesta pedagógica integra tradición, innovación y un fuerte compromiso con la formación integral, en un entorno de respeto, participación y pertenencia.
+✉ info@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 50%; left: 44%;" onclick="mostrarInfo('fotos/loba.jpg', `1. La Loba
+Ubicada frente a la entrada principal, la escultura de la Loba Capitolina con Rómulo y Remo simboliza la herencia cultural italiana que identifica a la Scuola. Esta figura histórica da la bienvenida a quienes ingresan al colegio y representa el vínculo con nuestras raíces, el valor de la historia y la importancia de la identidad compartida.
+✉ info@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 52%; left: 33%;" onclick="mostrarInfo('fotos/scuolacaffe.jpg', `3. Scuola Caffè
+El Scuola Caffè es un espacio pensado para que los estudiantes puedan permanecer en el colegio fuera del horario de clase, en un ambiente cómodo y tranquilo. Cuenta con sillones, mesas, baño propio y un entorno propicio para la espera, el descanso o el encuentro con compañeros antes de actividades extracurriculares o al finalizar la jornada.
+✉ info@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 52%; left: 27%;" onclick="mostrarInfo('fotos/bici.jpg', `4. Sector de bicicletas y motos
+El colegio dispone de un espacio específico para que los estudiantes puedan dejar sus bicicletas y motos de forma segura durante el horario escolar. Este sector está ubicado dentro del predio institucional y cuenta con acceso controlado, promoviendo la movilidad responsable y el cuidado de los medios de transporte personales.
+✉ info@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 20%; left: 77%;" onclick="mostrarInfo('fotos/canchas.jpg', `5. Canchas de fútbol
+La Scuola Italiana cuenta con dos canchas de fútbol acondicionadas para la práctica deportiva, tanto en el marco de las clases de educación física como en actividades extracurriculares y torneos internos o interinstitucionales. Estas canchas permiten fomentar el trabajo en equipo, la convivencia y el desarrollo físico de los estudiantes.
+✉ info@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+
+        <div class="punto" style="top: 32%; left: 75%;" onclick="mostrarInfo('fotos/hockey.jpg', `6. Canchas de hockey
+El colegio dispone de dos canchas de hockey que forman parte del proyecto deportivo institucional. Estas instalaciones permiten el entrenamiento, la competencia y el desarrollo de habilidades técnicas en este deporte, promoviendo la participación activa y el compromiso con los valores del juego limpio y la cooperación.
+✉ info@scuolaitaliana.edu.uy
+📞 (+598) 099 123 456`)">+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AQUÍ SE INSERTA EL MAPA INTERACTIVO -->
+
+
+  <div style="width: 718px; height: 20px; left: 49px; top: 900px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 64px; font-family: Ruwudu; font-weight: 600; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Acerca de Scuola italiana</div>
+  <div style="width: 1440px; height: 446px; left: 0px; top: 446px; position: absolute; background: linear-gradient(90deg, #00963A 0%, #E5151C 100%)"></div>
+  <div style="width: 856px; height: 20px; left: 5px; top: 840px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 64px; font-family: Crimson Pro; font-style: italic; font-weight: 400; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Acerca de la Scuola italiana</div>
+  <div style="width: 131px; height: 52px; left: 1174px; top: 37px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">PLATAFORMA</div>
+  <div style="width: 180px; height: 70px; left: 841px; top: 28px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">PROPUESTA EDUCATIVA</div>
+  <div style="width: 68px; height: 34px; left: 618px; top: 46px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">INICIO</div>
+  <div style="width: 1381px; height: 144px; left: 0px; top: 0px; position: absolute; background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0) 100%)"></div>
+  <div style="width: 33px; height: 33px; left: 1325px; top: 37px; position: absolute; overflow: hidden">
+    <div data-size="48" style="width: 48px; height: 48px; left: 0px; top: 0px; position: absolute; overflow: hidden">
+      <div style="width: 36px; height: 24px; left: 6px; top: 12px; position: absolute; outline: 4px var(--Icon-Default-Default, white) solid; outline-offset: -2px"></div>
+    </div>
+  </div><video 
+  style="width: 100vw; height: 100vh; left: 0; top: 100px; position: absolute; border-radius: 0; object-fit: cover; z-index: 0;"
+  src="fotos/scuola.mp4"
+  controls
+  autoplay 
+  loop
+>
+  Tu navegador no soporta video HTML5.
+</video>
+  <div style="width: 113px; height: 51px; left: 900px; top: 20px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">INSCRIPCIONES</div>
+  <div style="width: 115px; height: 34px; left: 600px; top: 32px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">INSTITUCIONAL</div>
+  <img style="width: 250px; height: 150px; left: 20px; top: -20px; position: absolute" src="fotos/logo2.png" />
+<div style="width: 539px; height: 0px; left: 129px; top: 2650px; position: absolute; outline: 1px #716E6E solid; outline-offset: -0.50px"></div>
+<div style="width: 539px; height: 0px; left: 771px; top: 2650px; position: absolute; outline: 1px #716E6E solid; outline-offset: -0.50px"></div>
+  <img style="width: 47.17px; height: 67px; left: 695px; top: 2617px; position: absolute" src="fotos/logo.png" />
+  <div style="width: 885px; left: 250px; top: 2693px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #2E2C6B; font-size: 64px; font-family: Ruwudu; font-weight: 600; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Espacio para  prosperar</div>
+  <div style="width: 767px; left: 300px; top: 2786px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #041E42; font-size: 16px; font-family: Crimson Pro; font-weight: 700; line-height: 25px; letter-spacing: 0.50px; word-wrap: break-word">Nuestro entorno físico tiene un impacto significativo en nuestra capacidad de aprendizaje. En Kent Denver, creemos que los estudiantes deben contar con espacios de aprendizaje dinámicos, espaciosos y de vanguardia que estimulen su curiosidad, estimulen su imaginación y les permitan alcanzar su máximo potencial. Nuestro campus de 81 hectáreas incluye:</div>
+  <div style="width: 767px; left: 300px; top: 2786px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #041E42; font-size: 16px; font-family: Crimson Pro; font-weight: 700; line-height: 25px; letter-spacing: 0.50px; word-wrap: break-word">
+ 
+</div>
+
+<!-- 🚀 AQUÍ INSERTÁS EL CARRUSEL -->
+<div class="carousel-container">
+  <div class="carousel-track" id="carouselTrack">
+    <img src="fotos/ejemplo1.jpg" alt="Imagen 1">
+    <img src="fotos/ejemplo2.jpg" alt="Imagen 2">
+    <img src="fotos/ejemplo3.jpg" alt="Imagen 3">
+    <img src="fotos/ejemplo4.jpg" alt="Imagen 4">
+    <img src="fotos/ejemplo5.jpg" alt="Imagen 5">
+    <img src="fotos/ejemplo6.jpg" alt="Imagen 6">
+  </div>
+
+  <button class="carousel-btn left" id="prevBtn">
+    <img src="fotos/flecha-izquierda.png" alt="Anterior">
+  </button>
+  <button class="carousel-btn right" id="nextBtn">
+    <img src="fotos/flecha-derecha.png" alt="Siguiente">
+  </button>
+</div>
+
+
+<!-- Panel de información del mapa -->
+<div class="infoPanel" id="infoPanel">
+  <button class="closeBtn" onclick="cerrarInfo()">X</button>
+  <img id="infoImage" src="" alt="Imagen del punto" />
+  <div class="content" id="infoText">Aquí aparecerá la información.</div>
+</div>
+
+<script>
+  function mostrarInfo(imagen, texto) {
+    document.getElementById('infoImage').src = imagen;
+    document.getElementById('infoText').innerText = texto;
+    document.getElementById('infoPanel').classList.add('active');
+  }
+
+  function cerrarInfo() {
+    document.getElementById('infoPanel').classList.remove('active');
+  }
+
+  // Cierra si se hace clic fuera del panel
+  document.addEventListener('click', function(e) {
+    const panel = document.getElementById('infoPanel');
+    if (!panel.contains(e.target) && !e.target.classList.contains('punto')) {
+      cerrarInfo();
+    }
+  });
+
+  
+</script>
+<script>
+  const track = document.getElementById('carouselTrack');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const slides = Array.from(track.children);
+  let index = 0;
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${index * 776}px)`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    index = (index + 1) % slides.length;
+    updateCarousel();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    index = (index - 1 + slides.length) % slides.length;
+    updateCarousel();
+  });
+</script>
+
+</body>
+</html>
