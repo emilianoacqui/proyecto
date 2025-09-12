@@ -2,21 +2,169 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scuola Italiana - Campus Interactivo</title>
   <style>
-    body {
+    * {
       margin: 0;
-      background: white;
-      font-family: sans-serif;
-      overflow-x: hidden;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* Estilos del mapa interactivo */
+    body {
+      font-family: sans-serif;
+      overflow-x: hidden;
+      background: white;
+    }
+
+    /* Header responsivo */
+    .header {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .header video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Navegación responsiva */
+    .nav-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      width: 200px;
+      height: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-item {
+      color: white;
+      font-size: 14px;
+      font-family: Roboto, sans-serif;
+      font-weight: 900;
+      text-align: center;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-item:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Sección principal */
+    .main-section {
+      width: 100%;
+      background: linear-gradient(90deg, #00963A 0%, #E5151C 100%);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .main-title {
+      color: white;
+      font-size: clamp(32px, 6vw, 64px);
+      font-family: Crimson Pro, serif;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    /* Menú de navegación interno */
+    .internal-nav {
+      background: white;
+      padding: 40px 20px;
+      border-bottom: 1px solid #716E6E;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .nav-grid-item {
+      color: #716E6E;
+      font-size: 14px;
+      font-family: Crimson Pro, serif;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 10px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .nav-grid-item:hover {
+      color: #2E2C6B;
+    }
+
+    /* Sección Explore Campus */
+    .explore-section {
+      padding: 60px 20px;
+      text-align: center;
+      background: white;
+    }
+
+    .section-title {
+      color: #2E2C6B;
+      font-size: clamp(32px, 5vw, 64px);
+      font-family: Ruwudu, serif;
+      font-weight: 600;
+      margin-bottom: 30px;
+    }
+
+    .section-description {
+      color: #041E42;
+      font-size: 16px;
+      font-family: Crimson Pro, serif;
+      font-weight: 700;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    /* Mapa interactivo responsivo */
+    .map-section {
+      background: #453D3D;
+      padding: 60px 20px;
+    }
+
     .mapa-container {
       position: relative;
-      max-width: 1000px;
+      max-width: 1200px;
       width: 100%;
-      margin: 20px auto;
+      margin: 0 auto;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
       border-radius: 10px;
       overflow: hidden;
@@ -27,84 +175,41 @@
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 10px 10px 0 0;
+      min-height: 300px;
+      object-fit: cover;
     }
 
     .punto {
       position: absolute;
-      width: 30px;
-      height: 30px;
+      width: clamp(25px, 3vw, 40px);
+      height: clamp(25px, 3vw, 40px);
       background-color: white;
       color: black;
       border-radius: 50%;
       font-weight: bold;
-      text-align: center;
-      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       border: 2px solid #444;
       transition: transform 0.2s;
       z-index: 10;
+      font-size: clamp(12px, 2vw, 18px);
     }
 
     .punto:hover {
       transform: scale(1.2);
+      background-color: #00963A;
+      color: white;
     }
-    /* 🎠 Carrusel */
-.carousel-container {
-  left: -50px;
-  top: 3000px;
-  position: relative;
-  width: 776px;
-  height: 436px;
-  margin: 40px auto;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
 
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carousel-track img {
-  width: 776px;
-  height: 436px;
-  flex-shrink: 0;
-  object-fit: cover;
-}
-
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 50%;
-}
-
-.carousel-btn img {
-  width: 40px;
-  height: 40px;
-}
-
-.carousel-btn.left {
-  left: 10px;
-}
-
-.carousel-btn.right {
-  right: 10px;
-}
-
-
+    /* Panel de información responsivo */
     .infoPanel {
       position: fixed;
       top: 0;
-      right: -400px;
-      width: 350px;
-      height: 100%;
+      right: -100vw;
+      width: min(90vw, 400px);
+      height: 100vh;
       background-color: #222;
       color: white;
       border-top-left-radius: 20px;
@@ -135,239 +240,516 @@
       border: none;
       color: white;
       font-size: 18px;
-      padding: 5px 10px;
+      padding: 8px 12px;
       cursor: pointer;
       border-radius: 8px;
+      z-index: 1001;
     }
 
     .infoPanel .content {
-      font-size: 15px;
-      line-height: 1.4em;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 50px;
+    }
+
+    /* Carrusel responsivo */
+    .carousel-container {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      margin: 60px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-track img {
+      width: 100%;
+      height: 400px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.7);
+      border: none;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0,0,0,0.9);
+    }
+
+    .carousel-btn img {
+      width: clamp(20px, 3vw, 40px);
+      height: clamp(20px, 3vw, 40px);
+    }
+
+    .carousel-btn.left {
+      left: 15px;
+    }
+
+    .carousel-btn.right {
+      right: 15px;
+    }
+
+    /* Sección Prosperar */
+    .prosper-section {
+      padding: 60px 20px;
+      text-align: center;
+      background: white;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 40px auto;
+      max-width: 600px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #716E6E;
+    }
+
+    .divider img {
+      margin: 0 20px;
+      width: 50px;
+      height: auto;
+    }
+
+    /* Footer */
+    /* Footer */
+.footer {
+  width: 100%;
+  height: 408px;
+  background-image: url('fotos/footer.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .nav-content {
+        justify-content: center;
+      }
+
+      .logo {
+        width: 150px;
+      }
+
+      .main-section {
+        padding: 40px 20px;
+      }
+
+      .internal-nav {
+        padding: 20px;
+      }
+
+      .nav-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .map-section {
+        padding: 40px 10px;
+      }
+
+      .carousel-track img {
+        height: 250px;
+      }
+
+      .punto {
+        font-size: 16px;
+        width: 30px;
+        height: 30px;
+      }
+
+      .infoPanel {
+        width: 95vw;
+        border-radius: 0;
+        right: -100vw;
+      }
+
+      .infoPanel.active {
+        right: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        min-height: 70vh;
+      }
+
+      .section-description {
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+      .carousel-btn {
+        padding: 8px;
+      }
+
+      .carousel-track img {
+        height: 200px;
+      }
+
+      .punto {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+      }
+    }
+
+    /* Animaciones */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Mejoras de accesibilidad */
+    .punto:focus,
+    .carousel-btn:focus,
+    .nav-item:focus {
+      outline: 2px solid #00963A;
+      outline-offset: 2px;
+    }
+
+    /* Spinner de carga */
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      display: none;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #00963A;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
 
-<div style="width: 1440px; height: 4417px; position: relative; background: white; overflow: hidden">
-  <div style="width: 211px; height: 48px; left: 159px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Bienvenudo a Scuola Italiana</div>
-  <div style="width: 193px; height: 48px; left: 385px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Nuestra Mision e Historia</div>
-  <div style="width: 93px; height: 48px; left: 1188px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Carreras</div>
-  <div style="width: 249px; height: 48px; left: 593px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Liderazgo y Vision estrategica</div>
-  <div style="width: 315px; height: 48px; left: 857px; top: 931px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Nuestro personal docente y administrativo</div>
-  <div style="width: 211px; height: 48px; left: 159px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Explora nuestro campus</div>
-  <div style="width: 193px; height: 48px; left: 385px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Voces de la comunidad</div>
-  <div style="width: 140px; height: 48px; left: 1141px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Calendario escolar</div>
-  <div style="width: 264px; height: 48px; left: 616px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Equidad y participacion comunitaria</div>
-  <div style="width: 315px; height: 48px; left: 857px; top: 960px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #716E6E; font-size: 15px; font-family: Crimson Pro; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Verano en Scuola Italiana</div>
-  <div style="width: 885px; height: 20px; left: 243px; top: 1123px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #2E2C6B; font-size: 64px; font-family: Ruwudu; font-weight: 600; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Explore Our Campus</div>
-  <div style="width: 1151px; height: 0px; left: 144px; top: 1017px; position: absolute; outline: 1px #716E6E solid; outline-offset: -0.50px"></div>
-  <div style="width: 767px; left: 302px; top: 1231px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #041E42; font-size: 16px; font-family: Crimson Pro; font-weight: 700; line-height: 25px; letter-spacing: 0.50px; word-wrap: break-word">Kent Denver's scenic, 200-acre campus supports more than 200,000 square feet of state-of-the-art academic, arts and athletic facilities. Our wide-open spaces also include a Tiny Farm, two reservoirs, 1,600+ trees, a thriving wetlands and easy access to the High Line Canal Trail. </div>
-  <img style="width: 1440px; height: 408px; left: 0px; top: 4009px; position: absolute" src="fotos/footer.png" />
-  <div style="width: 1410px; height: 1000px; left: 13px; top: 1614px; position: absolute; background: #453D3D">
-    <!-- MAPA INTERACTIVO INTEGRADO EN EL ÁREA GRIS -->
-    <div style="width: 1200px; left: 105px; top: 50px; position: relative;">
-      <div class="mapa-container">
-        <img src="fotos/scuola.jpg" alt="Mapa de la escuela" />
-
-        <!-- Puntos interactivos -->
-        <div class="punto" style="top: 12%; left: 40%;" onclick="mostrarInfo('fotos/scuolaclub.jpg', `Scuola Club ofrece a su comunidad educativa acceso a canchas de tenis, canchas de césped sintético, clases de gimnasia, un Club House para celebraciones y una colonia de vacaciones con actividades guiadas.
-
-Los alumnos pueden acceder a 30 becas completas para aprender y practicar tenis. Además, existen bonificaciones especiales para alumnos, socios, funcionarios y miembros de la comunidad en:
-
-Alquiler de salón, terraza y parrillero exterior
-Alquiler de canchas de tenis
-Cuota mensual como socio de tenis
-Invitación por partido
-Alquiler de cancha de césped sintético
-Clases grupales de tenis
-
-Contacto:
-✉ scuolaclub2019@gmail.com
-📞 (+598) 099 866 684`)">+</div>
-
-        <div class="punto" style="top: 26%; left: 50%;" onclick="mostrarInfo('fotos/poli.jpg', `El colegio cuenta con un polideportivo moderno y funcional, destinado a la realización de actividades deportivas, recreativas y eventos institucionales.
-
-El espacio está equipado para la práctica de diversos deportes como voleibol, básquetbol, handball, fútbol y gimnasia. También se utiliza para clases de educación física, encuentros deportivos, actividades integradoras y celebraciones escolares.
-
-El polideportivo está disponible durante el horario escolar y, en determinados casos, también puede utilizarse fuera del horario habitual con autorización previa.
-
-Es un lugar de encuentro, formación y disfrute para todos los niveles del colegio, promoviendo el trabajo en equipo, la vida activa y los valores del deporte.
-
-Por consultas y mayor información:
-✉ contacto@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 40%; left: 20%;" onclick="mostrarInfo('fotos/bachi.jpg', `Bachillerato del Colegio
-
-El colegio ofrece un bachillerato completo que combina formación académica sólida con el desarrollo personal de los estudiantes, preparándolos tanto para estudios terciarios como para su integración activa en la sociedad.
-
-Nuestros grupos de bachillerato trabajan en un ambiente de compromiso, responsabilidad y colaboración, participando en proyectos interdisciplinarios, actividades institucionales y propuestas que promueven la autonomía.
-
-Se destaca especialmente el grupo de BT3, por su compromiso constante, su iniciativa en los desafíos propuestos y su participación activa en la vida del colegio. Su desempeño ha sido motivo de reconocimiento dentro de nuestra comunidad educativa.
-
-Por consultas y mayor información:
-✉ secundaria@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 30%; left: 20%;" onclick="mostrarInfo('fotos/estacionamiento.jpg', `Estacionamiento del Colegio
-
-El colegio cuenta con un espacio de estacionamiento disponible para alumnos, funcionarios y familias de la comunidad educativa.
-
-El estacionamiento está ubicado dentro del predio del colegio y cuenta con sectores diferenciados para automóviles, motos y bicicletas. Su uso está pensado para facilitar el acceso seguro y ordenado durante las entradas y salidas escolares.
-
-El ingreso al estacionamiento se realiza por la entrada principal del colegio y está habilitado únicamente en horario escolar. El uso del espacio es gratuito y exclusivo para miembros de la institución.
-
-Por consultas y mayor información:
-✉ contacto@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 65%; left: 47%;" onclick="mostrarInfo('fotos/BBSIM.jpg', `La sección inicial del colegio está especialmente diseñada para niños y niñas de hasta 6 años, brindando un entorno seguro, cálido y estimulante donde comienzan sus primeros pasos en el ámbito educativo.
-
-A través de propuestas lúdicas, artísticas y sensoriales, los más pequeños desarrollan sus capacidades cognitivas, emocionales y sociales en un espacio pensado para su edad. Las actividades se enfocan en la exploración, el juego, la expresión y el vínculo afectivo con sus docentes y compañeros.
-
-El equipo docente acompaña de forma cercana cada etapa, promoviendo la autonomía, la curiosidad y el aprendizaje significativo desde los primeros años.
-
-Por consultas y mayor información:
-✉ inicial@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 43%; left: 46%;" onclick="mostrarInfo('fotos/nuestro-colegio.jpg', `2. Scuola italiana di montevideo
-La Scuola Italiana es una institución educativa bilingüe que acompaña el recorrido académico y personal de sus estudiantes desde los primeros años hasta el egreso de bachillerato. Su propuesta pedagógica integra tradición, innovación y un fuerte compromiso con la formación integral, en un entorno de respeto, participación y pertenencia.
-✉ info@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 50%; left: 44%;" onclick="mostrarInfo('fotos/loba.jpg', `1. La Loba
-Ubicada frente a la entrada principal, la escultura de la Loba Capitolina con Rómulo y Remo simboliza la herencia cultural italiana que identifica a la Scuola. Esta figura histórica da la bienvenida a quienes ingresan al colegio y representa el vínculo con nuestras raíces, el valor de la historia y la importancia de la identidad compartida.
-✉ info@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 52%; left: 33%;" onclick="mostrarInfo('fotos/scuolacaffe.jpg', `3. Scuola Caffè
-El Scuola Caffè es un espacio pensado para que los estudiantes puedan permanecer en el colegio fuera del horario de clase, en un ambiente cómodo y tranquilo. Cuenta con sillones, mesas, baño propio y un entorno propicio para la espera, el descanso o el encuentro con compañeros antes de actividades extracurriculares o al finalizar la jornada.
-✉ info@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 52%; left: 27%;" onclick="mostrarInfo('fotos/bici.jpg', `4. Sector de bicicletas y motos
-El colegio dispone de un espacio específico para que los estudiantes puedan dejar sus bicicletas y motos de forma segura durante el horario escolar. Este sector está ubicado dentro del predio institucional y cuenta con acceso controlado, promoviendo la movilidad responsable y el cuidado de los medios de transporte personales.
-✉ info@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 20%; left: 77%;" onclick="mostrarInfo('fotos/canchas.jpg', `5. Canchas de fútbol
-La Scuola Italiana cuenta con dos canchas de fútbol acondicionadas para la práctica deportiva, tanto en el marco de las clases de educación física como en actividades extracurriculares y torneos internos o interinstitucionales. Estas canchas permiten fomentar el trabajo en equipo, la convivencia y el desarrollo físico de los estudiantes.
-✉ info@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
-
-        <div class="punto" style="top: 32%; left: 75%;" onclick="mostrarInfo('fotos/hockey.jpg', `6. Canchas de hockey
-El colegio dispone de dos canchas de hockey que forman parte del proyecto deportivo institucional. Estas instalaciones permiten el entrenamiento, la competencia y el desarrollo de habilidades técnicas en este deporte, promoviendo la participación activa y el compromiso con los valores del juego limpio y la cooperación.
-✉ info@scuolaitaliana.edu.uy
-📞 (+598) 099 123 456`)">+</div>
+  <!-- Header con video -->
+  <div class="header">
+    <video autoplay loop muted playsinline>
+      <source src="fotos/scuola.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+    
+    <div class="nav-container">
+      <div class="nav-content">
+        <img class="logo" src="fotos/logo2.png" alt="Scuola Italiana Logo" />
+        <div class="nav-menu">
+          <div class="nav-item">INICIO</div>
+          <div class="nav-item">INSTITUCIONAL</div>
+          <div class="nav-item">PROPUESTA EDUCATIVA</div>
+          <div class="nav-item">INSCRIPCIONES</div>
+          <div class="nav-item">PLATAFORMA</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- AQUÍ SE INSERTA EL MAPA INTERACTIVO -->
-
-
-  <div style="width: 718px; height: 20px; left: 49px; top: 900px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 64px; font-family: Ruwudu; font-weight: 600; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Acerca de Scuola italiana</div>
-  <div style="width: 1440px; height: 446px; left: 0px; top: 446px; position: absolute; background: linear-gradient(90deg, #00963A 0%, #E5151C 100%)"></div>
-  <div style="width: 856px; height: 20px; left: 5px; top: 840px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 64px; font-family: Crimson Pro; font-style: italic; font-weight: 400; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Acerca de la Scuola italiana</div>
-  <div style="width: 131px; height: 52px; left: 1174px; top: 37px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">PLATAFORMA</div>
-  <div style="width: 180px; height: 70px; left: 841px; top: 28px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">PROPUESTA EDUCATIVA</div>
-  <div style="width: 68px; height: 34px; left: 618px; top: 46px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">INICIO</div>
-  <div style="width: 1381px; height: 144px; left: 0px; top: 0px; position: absolute; background: linear-gradient(180deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0) 100%)"></div>
-  <div style="width: 33px; height: 33px; left: 1325px; top: 37px; position: absolute; overflow: hidden">
-    <div data-size="48" style="width: 48px; height: 48px; left: 0px; top: 0px; position: absolute; overflow: hidden">
-      <div style="width: 36px; height: 24px; left: 6px; top: 12px; position: absolute; outline: 4px var(--Icon-Default-Default, white) solid; outline-offset: -2px"></div>
-    </div>
-  </div><video 
-  style="width: 100vw; height: 100vh; left: 0; top: 100px; position: absolute; border-radius: 0; object-fit: cover; z-index: 0;"
-  src="fotos/scuola.mp4"
-  controls
-  autoplay 
-  loop
->
-  Tu navegador no soporta video HTML5.
-</video>
-  <div style="width: 113px; height: 51px; left: 900px; top: 20px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">INSCRIPCIONES</div>
-  <div style="width: 115px; height: 34px; left: 600px; top: 32px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: white; font-size: 15px; font-family: Roboto; font-weight: 900; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">INSTITUCIONAL</div>
-  <img style="width: 250px; height: 150px; left: 20px; top: -20px; position: absolute" src="fotos/logo2.png" />
-<div style="width: 539px; height: 0px; left: 129px; top: 2650px; position: absolute; outline: 1px #716E6E solid; outline-offset: -0.50px"></div>
-<div style="width: 539px; height: 0px; left: 771px; top: 2650px; position: absolute; outline: 1px #716E6E solid; outline-offset: -0.50px"></div>
-  <img style="width: 47.17px; height: 67px; left: 695px; top: 2617px; position: absolute" src="fotos/logo.png" />
-  <div style="width: 885px; left: 250px; top: 2693px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #2E2C6B; font-size: 64px; font-family: Ruwudu; font-weight: 600; line-height: 16px; letter-spacing: 0.50px; word-wrap: break-word">Espacio para  prosperar</div>
-  <div style="width: 767px; left: 300px; top: 2786px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #041E42; font-size: 16px; font-family: Crimson Pro; font-weight: 700; line-height: 25px; letter-spacing: 0.50px; word-wrap: break-word">Nuestro entorno físico tiene un impacto significativo en nuestra capacidad de aprendizaje. En Kent Denver, creemos que los estudiantes deben contar con espacios de aprendizaje dinámicos, espaciosos y de vanguardia que estimulen su curiosidad, estimulen su imaginación y les permitan alcanzar su máximo potencial. Nuestro campus de 81 hectáreas incluye:</div>
-  <div style="width: 767px; left: 300px; top: 2786px; position: absolute; text-align: center; justify-content: center; display: flex; flex-direction: column; color: #041E42; font-size: 16px; font-family: Crimson Pro; font-weight: 700; line-height: 25px; letter-spacing: 0.50px; word-wrap: break-word">
- 
-</div>
-
-<!-- 🚀 AQUÍ INSERTÁS EL CARRUSEL -->
-<div class="carousel-container">
-  <div class="carousel-track" id="carouselTrack">
-    <img src="fotos/ejemplo1.jpg" alt="Imagen 1">
-    <img src="fotos/ejemplo2.jpg" alt="Imagen 2">
-    <img src="fotos/ejemplo3.jpg" alt="Imagen 3">
-    <img src="fotos/ejemplo4.jpg" alt="Imagen 4">
-    <img src="fotos/ejemplo5.jpg" alt="Imagen 5">
-    <img src="fotos/ejemplo6.jpg" alt="Imagen 6">
+  <!-- Sección principal -->
+  <div class="main-section">
+    <h1 class="main-title">Acerca de la Scuola italiana</h1>
   </div>
 
-  <button class="carousel-btn left" id="prevBtn">
-    <img src="fotos/flecha-izquierda.png" alt="Anterior">
-  </button>
-  <button class="carousel-btn right" id="nextBtn">
-    <img src="fotos/flecha-derecha.png" alt="Siguiente">
-  </button>
-</div>
+  <!-- Navegación interna -->
+  <div class="internal-nav">
+    <div class="nav-grid">
+      <div class="nav-grid-item">Bienvenido a Scuola Italiana<br>Explora nuestro campus</div>
+      <div class="nav-grid-item">Nuestra Misión e Historia<br>Voces de la comunidad</div>
+      <div class="nav-grid-item">Liderazgo y Visión estratégica<br>Equidad y participación comunitaria</div>
+      <div class="nav-grid-item">Nuestro personal docente y administrativo<br>Verano en Scuola Italiana</div>
+      <div class="nav-grid-item">Carreras<br>Calendario escolar</div>
+    </div>
+  </div>
 
+  <!-- Sección Explore Campus -->
+  <div class="explore-section fade-in">
+    <h2 class="section-title">Explore Our Campus</h2>
+    <p class="section-description">
+      Kent Denver's scenic, 200-acre campus supports more than 200,000 square feet of state-of-the-art academic, arts and athletic facilities. Our wide-open spaces also include a Tiny Farm, two reservoirs, 1,600+ trees, a thriving wetlands and easy access to the High Line Canal Trail.
+    </p>
+  </div>
 
-<!-- Panel de información del mapa -->
-<div class="infoPanel" id="infoPanel">
-  <button class="closeBtn" onclick="cerrarInfo()">X</button>
-  <img id="infoImage" src="" alt="Imagen del punto" />
-  <div class="content" id="infoText">Aquí aparecerá la información.</div>
-</div>
+  <!-- Mapa interactivo -->
+  <div class="map-section">
+    <div class="mapa-container">
+      <img src="fotos/scuola.jpg" alt="Mapa de la escuela" />
 
-<script>
-  function mostrarInfo(imagen, texto) {
-    document.getElementById('infoImage').src = imagen;
-    document.getElementById('infoText').innerText = texto;
-    document.getElementById('infoPanel').classList.add('active');
-  }
+      <!-- Puntos interactivos responsivos -->
+      <div class="punto" style="top: 12%; left: 40%;" onclick="mostrarInfo('fotos/scuolaclub.jpg', 'Scuola Club ofrece a su comunidad educativa acceso a canchas de tenis, canchas de césped sintético, clases de gimnasia, un Club House para celebraciones y una colonia de vacaciones con actividades guiadas. Los alumnos pueden acceder a 30 becas completas para aprender y practicar tenis.')">+</div>
 
-  function cerrarInfo() {
-    document.getElementById('infoPanel').classList.remove('active');
-  }
+      <div class="punto" style="top: 26%; left: 50%;" onclick="mostrarInfo('fotos/poli.jpg', 'El colegio cuenta con un polideportivo moderno y funcional, destinado a la realización de actividades deportivas, recreativas y eventos institucionales. El espacio está equipado para la práctica de diversos deportes como voleibol, básquetbol, handball, fútbol y gimnasia.')">+</div>
 
-  // Cierra si se hace clic fuera del panel
-  document.addEventListener('click', function(e) {
-    const panel = document.getElementById('infoPanel');
-    if (!panel.contains(e.target) && !e.target.classList.contains('punto')) {
-      cerrarInfo();
+      <div class="punto" style="top: 40%; left: 20%;" onclick="mostrarInfo('fotos/bachi.jpg', 'Bachillerato del Colegio. El colegio ofrece un bachillerato completo que combina formación académica sólida con el desarrollo personal de los estudiantes, preparándolos tanto para estudios terciarios como para su integración activa en la sociedad.')">+</div>
+
+      <div class="punto" style="top: 30%; left: 20%;" onclick="mostrarInfo('fotos/estacionamiento.jpg', 'Estacionamiento del Colegio. El colegio cuenta con un espacio de estacionamiento disponible para alumnos, funcionarios y familias de la comunidad educativa, con sectores diferenciados para automóviles, motos y bicicletas.')">+</div>
+
+      <div class="punto" style="top: 65%; left: 47%;" onclick="mostrarInfo('fotos/BBSIM.jpg', 'La sección inicial del colegio está especialmente diseñada para niños y niñas de hasta 6 años, brindando un entorno seguro, cálido y estimulante donde comienzan sus primeros pasos en el ámbito educativo.')">+</div>
+
+      <div class="punto" style="top: 43%; left: 46%;" onclick="mostrarInfo('fotos/nuestro-colegio.jpg', 'Scuola italiana di montevideo. La Scuola Italiana es una institución educativa bilingüe que acompaña el recorrido académico y personal de sus estudiantes desde los primeros años hasta el egreso de bachillerato.')">+</div>
+
+      <div class="punto" style="top: 50%; left: 44%;" onclick="mostrarInfo('fotos/loba.jpg', 'La Loba. Ubicada frente a la entrada principal, la escultura de la Loba Capitolina con Rómulo y Remo simboliza la herencia cultural italiana que identifica a la Scuola.')">+</div>
+
+      <div class="punto" style="top: 52%; left: 33%;" onclick="mostrarInfo('fotos/scuolacaffe.jpg', 'Scuola Caffè. El Scuola Caffè es un espacio pensado para que los estudiantes puedan permanecer en el colegio fuera del horario de clase, en un ambiente cómodo y tranquilo.')">+</div>
+
+      <div class="punto" style="top: 52%; left: 27%;" onclick="mostrarInfo('fotos/bici.jpg', 'Sector de bicicletas y motos. El colegio dispone de un espacio específico para que los estudiantes puedan dejar sus bicicletas y motos de forma segura durante el horario escolar.')">+</div>
+
+      <div class="punto" style="top: 20%; left: 77%;" onclick="mostrarInfo('fotos/canchas.jpg', 'Canchas de fútbol. La Scuola Italiana cuenta con dos canchas de fútbol acondicionadas para la práctica deportiva, tanto en el marco de las clases de educación física como en actividades extracurriculares.')">+</div>
+
+      <div class="punto" style="top: 32%; left: 75%;" onclick="mostrarInfo('fotos/hockey.jpg', 'Canchas de hockey. El colegio dispone de dos canchas de hockey que forman parte del proyecto deportivo institucional, permitiendo el entrenamiento y la competencia.')">+</div>
+    </div>
+  </div>
+
+  <!-- Sección Prosperar -->
+  <div class="prosper-section">
+    <div class="divider">
+      <img src="fotos/logo2.png" alt="Logo" />
+    </div>
+    <h2 class="section-title">Espacio para prosperar</h2>
+    <p class="section-description">
+      Nuestro entorno físico tiene un impacto significativo en nuestra capacidad de aprendizaje. En Kent Denver, creemos que los estudiantes deben contar con espacios de aprendizaje dinámicos, espaciosos y de vanguardia que estimulen su curiosidad, estimulen su imaginación y les permitan alcanzar su máximo potencial. Nuestro campus de 81 hectáreas incluye:
+    </p>
+
+    <!-- Carrusel responsivo -->
+    <div class="carousel-container">
+      <div class="carousel-track" id="carouselTrack">
+        <img src="fotos/ejemplo1.jpg" alt="Imagen 1">
+        <img src="fotos/ejemplo2.jpg" alt="Imagen 2">
+        <img src="fotos/ejemplo3.jpg" alt="Imagen 3">
+        <img src="fotos/ejemplo4.jpg" alt="Imagen 4">
+        <img src="fotos/ejemplo5.jpg" alt="Imagen 5">
+        <img src="fotos/ejemplo6.jpg" alt="Imagen 6">
+      </div>
+
+      <button class="carousel-btn left" id="prevBtn" aria-label="Imagen anterior">
+        <img src="fotos/flecha-izquierda.png" alt="Anterior">
+      </button>
+      <button class="carousel-btn right" id="nextBtn" aria-label="Imagen siguiente">
+        <img src="fotos/flecha-derecha.png" alt="Siguiente">
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+<div class="footer"></div>
+
+  <!-- Panel de información -->
+  <div class="infoPanel" id="infoPanel">
+    <button class="closeBtn" onclick="cerrarInfo()" aria-label="Cerrar información">×</button>
+    <img id="infoImage" src="" alt="Imagen del punto" />
+    <div class="content" id="infoText">Aquí aparecerá la información.</div>
+  </div>
+
+  <script>
+    // Funciones del mapa
+    function mostrarInfo(imagen, texto) {
+      const panel = document.getElementById('infoPanel');
+      const img = document.getElementById('infoImage');
+      const text = document.getElementById('infoText');
+      
+      img.src = imagen;
+      text.innerText = texto;
+      panel.classList.add('active');
+      
+      // Bloquear scroll del body cuando el panel está abierto
+      document.body.style.overflow = 'hidden';
     }
-  });
 
-  
-</script>
-<script>
-  const track = document.getElementById('carouselTrack');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const slides = Array.from(track.children);
-  let index = 0;
+    function cerrarInfo() {
+      const panel = document.getElementById('infoPanel');
+      panel.classList.remove('active');
+      
+      // Restaurar scroll del body
+      document.body.style.overflow = 'auto';
+    }
 
-  function updateCarousel() {
-    track.style.transform = `translateX(-${index * 776}px)`;
-  }
+    // Cerrar panel al hacer clic fuera
+    document.addEventListener('click', function(e) {
+      const panel = document.getElementById('infoPanel');
+      const puntos = document.querySelectorAll('.punto');
+      const esPunto = Array.from(puntos).some(punto => punto.contains(e.target));
+      
+      if (!panel.contains(e.target) && !esPunto && panel.classList.contains('active')) {
+        cerrarInfo();
+      }
+    });
 
-  nextBtn.addEventListener('click', () => {
-    index = (index + 1) % slides.length;
-    updateCarousel();
-  });
+    // Funciones del carrusel
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slides = Array.from(track.children);
+    let index = 0;
+    let slideWidth = 0;
 
-  prevBtn.addEventListener('click', () => {
-    index = (index - 1 + slides.length) % slides.length;
-    updateCarousel();
-  });
-</script>
+    function updateSlideWidth() {
+      slideWidth = slides[0].offsetWidth;
+    }
 
+    function updateCarousel() {
+      updateSlideWidth();
+      track.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % slides.length;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + slides.length) % slides.length;
+      updateCarousel();
+    });
+
+    // Auto-play del carrusel
+    let autoPlay = setInterval(() => {
+      index = (index + 1) % slides.length;
+      updateCarousel();
+    }, 5000);
+
+    // Pausar auto-play al hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+      clearInterval(autoPlay);
+    });
+
+    carouselContainer.addEventListener('mouseleave', () => {
+      autoPlay = setInterval(() => {
+        index = (index + 1) % slides.length;
+        updateCarousel();
+      }, 5000);
+    });
+
+    // Control por teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        index = (index - 1 + slides.length) % slides.length;
+        updateCarousel();
+      } else if (e.key === 'ArrowRight') {
+        index = (index + 1) % slides.length;
+        updateCarousel();
+      } else if (e.key === 'Escape') {
+        cerrarInfo();
+      }
+    });
+
+    // Gestos táctiles para móviles
+    let startX = 0;
+    let endX = 0;
+
+    carouselContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    carouselContainer.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          // Swipe left - next
+          index = (index + 1) % slides.length;
+        } else {
+          // Swipe right - prev
+          index = (index - 1 + slides.length) % slides.length;
+        }
+        updateCarousel();
+      }
+    });
+
+    // Redimensionar ventana
+    window.addEventListener('resize', () => {
+      updateCarousel();
+    });
+
+    // Animaciones al scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observar elementos para animar
+    document.querySelectorAll('.explore-section, .prosper-section').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Loading inicial
+    window.addEventListener('load', () => {
+      document.getElementById('loading').style.display = 'none';
+      updateCarousel();
+    });
+
+    // Lazy loading para imágenes
+    if ('loading' in HTMLImageElement.prototype) {
+      const images = document.querySelectorAll('img[data-src]');
+      images.forEach(img => {
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      });
+    } else {
+      // Fallback para navegadores que no soportan loading="lazy"
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+      document.body.appendChild(script);
+    }
+  </script>
 </body>
 </html>

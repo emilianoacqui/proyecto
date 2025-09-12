@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scuola Italiana di Montevideo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather Sans', Arial, sans-serif;
+            overflow-x: auto;
+            background: white;
+        }
+
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            height: 100vh;
+            min-height: 800px;
+            background: url('https://placehold.co/1920x800') center/cover;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: rgba(10, 36, 82, 0.5);
+        }
+
+        .logo {
+            position: absolute;
+            top: 0px;
+            left: 0%;
+            width: 400px;
+            height: 200px;
+            
+        }
+
+        .user-icon {
+            position: absolute;
+            top: 64px;
+            right: 5%;
+            width: 75px;
+            height: 75px;
+            background: url('https://placehold.co/75x75') no-repeat;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 40%;
+            left: 5%;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.2;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
+            margin-bottom: 30px;
+        }
+
+        .admissions-btn {
+            background: #DC343C;
+            border-radius: 20px;
+            padding: 20px 40px;
+            color: white;
+            font-size: 36px;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Education Levels Section */
+        .education-levels {
+            display: flex;
+            height: 500px;
+            margin-top: -50px;
+        }
+
+        .level-card {
+            flex: 1;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .level-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.5;
+        }
+
+        .inicial {
+            background-image: url('https://placehold.co/449x446');
+        }
+
+        .inicial::before {
+            background: #049B4C;
+        }
+
+        .primaria {
+            background-image: url('https://placehold.co/554x449');
+        }
+
+        .primaria::before {
+            background: #D9D9D9;
+        }
+
+        .secundaria {
+            background-image: url('https://placehold.co/445x441');
+        }
+
+        .secundaria::before {
+            background: #DC343C;
+        }
+
+        .level-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .level-title {
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
+        }
+
+        .level-age {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
+        }
+
+        .level-btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            color: white;
+            font-size: 36px;
+            text-decoration: none;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
+        }
+
+        .btn-green { background: #049B4C; }
+        .btn-gray { background: #D9D9D9; }
+        .btn-red { background: #DC343C; }
+
+        /* Color Stripes */
+        .color-stripes {
+            height: 57px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stripe {
+            flex: 1;
+        }
+
+        .stripe-blue { background: #0A2452; }
+        .stripe-green { background: #049B4C; }
+        .stripe-gray { background: #D9D9D9; }
+        .stripe-red { background: #DC343C; }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 5%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            min-height: 600px;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 442px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .about-content {
+            flex: 1.5;
+            max-width: 739px;
+        }
+
+        .section-title-small {
+            color: #00B143;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-text {
+            color: #1D1A1A;
+            font-size: 25px;
+            line-height: 30px;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+        }
+
+        .read-more-btn {
+            background: #EC221F;
+            color: #FEE9E7;
+            padding: 12px 24px;
+            border: 1px solid #C00F0C;
+            border-radius: 8px;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* Institutional Quality Section */
+        .quality-section {
+            background: rgba(10, 36, 82, 0.75);
+            padding: 100px 5%;
+            text-align: center;
+            position: relative;
+            background-image: src('fotos/calidadinstitucional.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .quality-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 36, 82, 0.3); /* Menos opacidad */
+            z-index: 1;
+        }
+
+        .quality-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            color: white;
+            font-size: 96px;
+            font-weight: 400;
+            margin-bottom: 50px;
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .quality-item {
+            text-align: center;
+            color: white;
+        }
+
+        .quality-icon {
+            width: 100px;
+            height: 100px;
+            background: #DC343C;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quality-icon img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .quality-text {
+            font-size: 32px;
+            font-weight: 400;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 65%; /* antes estaba en 50% */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 440px;
+            height: 430px;
+            background: #133269;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-circle img {
+            width: 225px;
+            height: 225px;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: #1B2F6F;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .projects-title {
+            color: #F4BC1C;
+            font-size: 96px;
+            font-weight: 400;
+            margin-bottom: 80px;
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-item {
+            background: #D9D9D9;
+            border-radius: 50px 0 0 50px;
+            display: flex;
+            align-items: center;
+            min-height: 344px;
+            overflow: hidden;
+        }
+
+        .project-item:nth-child(even) {
+            border-radius: 0 50px 50px 0;
+            flex-direction: row-reverse;
+        }
+
+        .project-content {
+            flex: 1;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .project-title {
+            color: #E5151C;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: black;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 25px;
+            margin-bottom: 30px;
+        }
+
+        .project-btn {
+            background: #B00900;
+            color: white;
+            padding: 8px 45px;
+            border-radius: 23px;
+            border: 1px solid #B00900;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .project-image {
+            flex: 1;
+            height: 344px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 100px 5%;
+            background: linear-gradient(to right, #0A2452 0%, #0A2452 50%, #004ECC 50%, #004ECC 100%);
+        }
+
+        .news-header {
+            text-align: right;
+            margin-bottom: 50px;
+            padding-right: 10%;
+        }
+
+        .news-title {
+            color: white;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .news-subtitle {
+            color: #E3A412;
+            font-size: 36px;
+            font-weight: 400;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: #006326;
+            border-radius: 27px;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 238px;
+            object-fit: cover;
+        }
+
+        .news-card-content {
+            padding: 30px 15px;
+        }
+
+        .news-card-text {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 25px;
+            margin-bottom: 30px;
+        }
+
+        .news-card-btn {
+            background: #B00900;
+            color: white;
+            padding: 8px 45px;
+            border-radius: 23px;
+            border: 1px solid #B00900;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        /* Footer Links */
+        .footer-links {
+            background: #1D1A1A;
+            padding: 80px 5%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 257px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-size: 32px;
+            font-weight: 400;
+        }
+
+        .footer-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .footer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.25;
+        }
+
+        .footer-card-content {
+            position: relative;
+            z-index: 2;
+        }
+        /* Mover Propuesta Ecológica debajo de Idiomas */
+/* Poner Propuesta Ecológica debajo de Idiomas */
+.quality-item.ecologica {
+    grid-column: 3; /* misma columna que Idiomas */
+    grid-row: 3;    /* una fila más abajo que Idiomas */
+    z-index: 2;
+}
+
+
+
+        .footer-card.blue::before { background: #2C4C84; }
+        .footer-card.red::before { background: #DC343C; }
+        .footer-card.yellow::before { background: #FDB813; }
+        .footer-card.green::before { background: #049B4C; }
+        .footer-card.dark-blue::before { background: #0A2452; }
+
+        .footer-bottom {
+            height: 408px;
+            background: url('https://placehold.co/1440x408') center/cover;
+        }
+
+        .footer-logo {
+            position: absolute;
+            bottom: 150px;
+            right: 5%;
+            width: 114px;
+            height: 150px;
+            background: url('https://placehold.co/114x150') no-repeat;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title { font-size: 40px; }
+            .main-title { font-size: 72px; }
+            .projects-title { font-size: 72px; }
+            .quality-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .education-levels { flex-direction: column; }
+            .about-section { flex-direction: column; }
+            .project-item { flex-direction: column !important; border-radius: 20px !important; }
+            .quality-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 32px; }
+            .main-title { font-size: 48px; }
+            .projects-title { font-size: 48px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-overlay"></div>
+            <div class="logo">
+                <img src="fotos/logo.png" alt="Logo Scuola Italiana" style="width:100%;height:100%;object-fit:contain;">
+            </div>
+            <div class="user-icon"></div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title">Una nueva visión de la educación.<br> La Scuola aperta al mondo</h1>
+                <a href="#" class="admissions-btn">Admisiones</a>
+            </div>
+        </header>
+
+        <!-- Education Levels Section -->
+        <section class="education-levels">
+            <div class="level-card inicial">
+                <div class="level-content">
+                    <h2 class="level-title">Inicial</h2>
+                    <p class="level-age">3 meses a 5 años</p>
+                    <a href="#" class="level-btn btn-green">Ver mas</a>
+                </div>
+            </div>
+            <div class="level-card primaria">
+                <div class="level-content">
+                    <h2 class="level-title">Primaria</h2>
+                    <p class="level-age">6 a 12 años</p>
+                    <a href="#" class="level-btn btn-gray">Ver Mas</a>
+                </div>
+            </div>
+            <div class="level-card secundaria">
+                <div class="level-content">
+                    <h2 class="level-title">Secundaria</h2>
+                    <p class="level-age">12 a 18 años</p>
+                    <a href="#" class="level-btn btn-red">Ver mas</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Color Stripes -->
+        <div class="color-stripes">
+            <div class="stripe stripe-blue"></div>
+            <div class="stripe stripe-green"></div>
+            <div class="stripe stripe-gray"></div>
+            <div class="stripe stripe-red"></div>
+        </div>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-image">
+                <img src="https://placehold.co/442x350" alt="Sobre nosotros">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title-small">SOBRE NOSOTROS</h2>
+                <p class="about-text">La Scuola Italiana di Montevideo desarrolla un programa educativo nacional e internacional que abre las puertas a un mundo plurilingüe y multicultural.</p>
+                <a href="#" class="read-more-btn">Leer Mas -></a>
+            </div>
+        </section>
+
+        <!-- Institutional Quality Section -->
+        <section class="quality-section">
+    <div class="quality-content">
+        <h2 class="main-title">Calidad Institucional</h2>
+        
+        <div class="quality-grid">
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/lapiz.png" alt="Cursos">
+                </div>
+                <p class="quality-text">Cursos extracurriculares</p>
+            </div>
+            
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/personas.png" alt="Convivencia">
+                </div>
+                <p class="quality-text">Convivencia<br> en el colegio</p>
+            </div>
+            
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/futbol.png" alt="Deportes">
+                </div>
+                <p class="quality-text">Deportes</p>
+            </div>
+            
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/ciudadania.png" alt="Liderazgo">
+                </div>
+                <p class="quality-text">Liderazgo, voluntariado,<br> ciudadanía activa</p>
+            </div>
+            
+            <div class="center-circle">
+                <img src="fotos/loguito.png" alt="Centro Calidad Institucional">
+            </div>
+            
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/arte.png" alt="Arte">
+                </div>
+                <p class="quality-text">Arte, ciencia<br> y tecnologia</p>
+            </div>
+            
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/estudio.png" alt="Idiomas">
+                </div>
+                <p class="quality-text">Idiomas</p>
+            </div>
+            
+            <div class="quality-item">
+                <div class="quality-icon">
+                    <img src="fotos/intercambio.png" alt="Intercambios">
+                </div>
+                <p class="quality-text">Intercambios</p>
+            </div>
+            
+            <div class="quality-item ecologica">
+    <div class="quality-icon">
+        <img src="fotos/ecologia.png" alt="Ecológica">
+    </div>
+    <p class="quality-text">Propuesta<br> ecologica</p>
+</div>
+
+        </div>
+    </div>
+</section>
+
+
+
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <h2 class="projects-title">Nuestros Proyectos</h2>
+            
+            <div class="projects-grid">
+                <div class="project-item">
+                    <div class="project-content">
+                        <h3 class="project-title">Arcimboldo</h3>
+                        <p class="project-description">Se trata de una propuesta multidisciplinaria dirigida a estudiantes de 6o año de Ciencias Biológicas y Social-Económico, integrando contenidos de italiano, matemática, literatura, biología y química.</p>
+                        <a href="#" class="project-btn">Boton</a>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://placehold.co/516x344" alt="Arcimboldo">
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="project-content">
+                        <h3 class="project-title">Heliopolis</h3>
+                        <p class="project-description">En el marco del proyecto "Heliópolis" cuyo objetivo es investigar sobre la figura de Francisco Piria y sus conexiones con la alquimia y el estudio de la astronomía los alumnos visitan la ciudad de Piriápolis.</p>
+                        <a href="#" class="project-btn">Ver Mas</a>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://placehold.co/487x344" alt="Heliopolis">
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="project-content">
+                        <h3 class="project-title">Scuola paradiso ecologico</h3>
+                        <p class="project-description">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                        <a href="#" class="project-btn">Boton</a>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://placehold.co/541x344" alt="Scuola paradiso">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="news-section">
+            <div class="news-header">
+                <h2 class="news-title">Noticias</h2>
+                <p class="news-subtitle">Destacadas</p>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-card">
+                    <img src="https://placehold.co/317x238" alt="Noticia 1">
+                    <div class="news-card-content">
+                        <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                        <a href="#" class="news-card-btn">Boton</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://placehold.co/317x238" alt="Noticia 2">
+                    <div class="news-card-content">
+                        <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                        <a href="#" class="news-card-btn">Boton</a>
+                    </div>
+                </div>
+                
+                <div class="news-card">
+                    <img src="https://placehold.co/317x238" alt="Noticia 3">
+                    <div class="news-card-content">
+                        <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                        <a href="#" class="news-card-btn">Boton</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Links -->
+        <section class="footer-links">
+            <div class="footer-grid">
+                <div class="footer-card blue">
+                    <img src="https://placehold.co/222x257" alt="Acceso a familia">
+                    <div class="footer-card-content">Acceso a<br>familia</div>
+                </div>
+                
+                <div class="footer-card red">
+                    <img src="https://placehold.co/222x257" alt="Comunidad Exalumnos">
+                    <div class="footer-card-content">Comunidad<br>Exalumnos</div>
+                </div>
+                
+                <div class="footer-card yellow">
+                    <img src="https://placehold.co/222x257" alt="Scuola Club">
+                    <div class="footer-card-content">Scuola Club</div>
+                </div>
+                
+                <div class="footer-card green">
+                    <img src="https://placehold.co/222x257" alt="Noticias">
+                    <div class="footer-card-content">Noticias</div>
+                </div>
+                
+                <div class="footer-card dark-blue">
+                    <img src="https://placehold.co/222x257" alt="Cursos de idioma">
+                    <div class="footer-card-content">Cursos de<br>idioma</div>
+                </div>
+                
+                <div class="footer-card red">
+                    <img src="https://placehold.co/222x257" alt="Trabaja con nosotros">
+                    <div class="footer-card-content">Trabaja con<br>nosotros</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Bottom -->
+        <footer class="footer-bottom">
+            <div class="footer-logo"></div>
+        </footer>
+    </div>
+</body>
+</html>
