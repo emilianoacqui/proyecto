@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diseño Scuola</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+    }
+    .container {
+      width: 1369px;
+      height: 4463px;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .absolute {
+      position: absolute;
+    }
+    .overlay {
+      width: 1440px;
+      height: 200px;
+      left: 0px;
+      top: 0px;
+      opacity: 0.5;
+      background: #0A2452;
+    }
+    .gradient {
+      width: 1370px;
+      height: 2444px;
+      left: 0px;
+      top: 1038px;
+      background: linear-gradient(178deg, #1B2F6F 0%, white 100%);
+    }
+    .blue-box {
+      width: 768px;
+      height: 498px;
+      left: 13px;
+      top: 2182px;
+      background: #1B2F6F;
+      border-radius: 40px;
+    }
+    .gray-box {
+      background: #D9D9D9;
+      border-radius: 15px;
+    }
+    .gray-box.center {
+      width: 938px;
+      height: 263px;
+      left: 245px;
+      top: 3345px;
+    }
+    .gray-box.right {
+      width: 363px;
+      height: 263px;
+      left: 1316px;
+      top: 3345px;
+    }
+    .gray-box.left {
+      width: 343px;
+      height: 263px;
+      left: -231px;
+      top: 3345px;
+    }
+    .text-white {
+      color: white;
+      font-size: 48px;
+      font-family: Ubuntu, sans-serif;
+      font-weight: 400;
+      word-wrap: break-word;
+    }
+    .text-dark {
+      color: #373737;
+      font-size: 48px;
+      font-family: Ubuntu, sans-serif;
+      font-weight: 400;
+    }
+    .text-gray {
+      color: #716E6E;
+      font-size: 38px;
+      font-family: Ubuntu, sans-serif;
+      font-weight: 400;
+    }
+    .text-big-gray {
+      color: #969393;
+      font-size: 64px;
+      font-family: Ubuntu, sans-serif;
+      font-weight: 400;
+    }
+    .tag-red {
+      color: #DC343C;
+      font-size: 15px;
+      font-family: 'Crimson Pro', serif;
+      font-weight: 900;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .tag-gray {
+      color: #716E6E;
+      font-size: 15px;
+      font-family: 'Crimson Pro', serif;
+      font-weight: 900;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Imagen de fondo -->
+    <img class="absolute" style="width: 1370px; height: 1044px; left: 0; top: -6px;" src="https://placehold.co/1370x1044" alt="Fondo">
+    
+    <!-- Overlay -->
+    <div class="absolute overlay"></div>
+
+    <!-- Logos -->
+    <img class="absolute" style="width: 300px; height: 106px; left: 47px; top: 47px;" src="https://placehold.co/300x106" alt="Logo">
+    <img class="absolute" style="width: 75px; height: 75px; left: 1259px; top: 78px;" src="https://placehold.co/75x75" alt="Icono">
+
+    <!-- Imagen secundaria -->
+    <img class="absolute" style="width: 114px; height: 150px; left: 1168px; top: 3719px;" src="https://placehold.co/114x150" alt="Imagen extra">
+
+    <!-- Fondo degradado -->
+    <div class="absolute gradient"></div>
+
+    <!-- Caja azul -->
+    <div class="absolute blue-box"></div>
+    <img class="absolute" style="width: 803px; height: 534px; left: 45px; top: 2232px; border-radius: 40px;" src="https://placehold.co/803x534" alt="Imagen sobre azul">
+
+    <!-- Textos -->
+    <div class="absolute text-white" style="left: 80px; top: 1342px;">
+      AAAAAAAAaaaa<br/>aaaaaaaaaaaaaaa<br/>aaa<br/>AAAAAAAAaaaa<br/>aaaaaaaaaaaaaaa<br/>aaaAAAAAAAAaaaa<br/>aaaaaaaaaaaaaaa<br/>aaa
+    </div>
+    <div class="absolute text-white" style="left: 928px; top: 2240px;">
+      AAAAAAAAaaaa<br/>aaaaaaaaaaaaaaa<br/>aaa<br/>AAAAAAAAaaaa<br/>aaaaaaaaaaaaaaa<br/>aaaAAAAAAAAaaaa<br/>aaaaaaaaaaaaaaa<br/>aaa
+    </div>
+
+   
+    <div class="absolute tag-red" style="width: 140px; height: 48px; left: 1119px; top: 1121px;">Scuola Paradiso Ecologico</div>
+    <div class="absolute tag-gray" style="width: 264px; height: 48px; left: 583px; top: 1126px;">Heliopolis</div>
+    <div class="absolute tag-gray" style="width: 315px; height: 48px; left: 80px; top: 1121px;">Arccimboldo</div>
+  </div>
+</body>
+</html>
