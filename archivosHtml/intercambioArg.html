@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intercambio a EEUU</title>
+
+  <!-- Fuentes de Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400&family=Hermeneus+One&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .exchange-page {
+      width: 1377px;
+      height: 4652px;
+      position: relative;
+      background: white;
+      overflow: hidden;
+    }
+
+    /* Fondo principal */
+    .bg-main {
+      width: 1440px;
+      height: 2130px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    /* Barra superior */
+    .top-bar {
+      width: 1440px;
+      height: 200px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #0A2452;
+      opacity: 0.5;
+    }
+
+    .logo {
+      width: 300.69px;
+      height: 106px;
+      position: absolute;
+      left: 47px;
+      top: 47px;
+    }
+
+    .menu-icon {
+      width: 75px;
+      height: 75px;
+      position: absolute;
+      left: 1278px;
+      top: 63px;
+    }
+
+    /* Título */
+    .exchange-title {
+      position: absolute;
+      left: 257px;
+      top: 2779px;
+      font-size: 100px;
+      font-family: "Merriweather Sans", sans-serif;
+      font-weight: 400;
+      color: black;
+      text-align: right;
+    }
+
+    /* Tarjeta izquierda */
+    .card-left {
+      width: 380px;
+      height: 318px;
+      position: absolute;
+      left: 565px;
+      top: 2999px;
+      background: #DC343C;
+      border-radius: 15px;
+    }
+
+    .card-left-img {
+      width: 393px;
+      height: 215px;
+      position: absolute;
+      left: 552px;
+      top: 2999px;
+      border-radius: 15px;
+    }
+
+    .card-left-overlay {
+      width: 392px;
+      height: 318px;
+      position: absolute;
+      left: 553px;
+      top: 2999px;
+      background: #DC343C;
+      border-radius: 15px;
+      opacity: 0.5;
+    }
+
+    .card-left-text {
+      width: 366px;
+      height: 148px;
+      position: absolute;
+      left: 566px;
+      top: 2999px;
+      text-align: center;
+      color: white;
+      font-size: 64px;
+      font-family: "Hermeneus One", sans-serif;
+      font-weight: 400;
+    }
+
+    /* Tarjeta derecha */
+    .card-right-img {
+      width: 393px;
+      height: 215px;
+      position: absolute;
+      left: 1000px;
+      top: 3718px;
+      border-radius: 15px;
+    }
+
+    .card-right-overlay {
+      width: 392px;
+      height: 318px;
+      position: absolute;
+      left: 1001px;
+      top: 3615px;
+      background: #DC343C;
+      border-radius: 15px;
+      opacity: 0.5;
+    }
+
+    .card-right-text {
+      width: 366px;
+      height: 148px;
+      position: absolute;
+      left: 1014px;
+      top: 3802px;
+      text-align: center;
+      color: white;
+      font-size: 64px;
+      font-family: "Hermeneus One", sans-serif;
+      font-weight: 400;
+    }
+
+    /* Imagen central */
+    .main-photo {
+      width: 828px;
+      height: 600px;
+      position: absolute;
+      left: 553px;
+      top: 3119px;
+      border-radius: 20px;
+    }
+
+    /* Texto descriptivo */
+    .description {
+      width: 494px;
+      position: absolute;
+      left: 26px;
+      top: 2942px;
+      font-size: 40px;
+      font-family: "Merriweather Sans", sans-serif;
+      font-weight: 400;
+      color: black;
+      text-align: right;
+    }
+
+    /* Imágenes adicionales */
+    .small-icon {
+      width: 114px;
+      height: 150px;
+      position: absolute;
+      left: 1263px;
+      top: 3934px;
+    }
+
+    .large-bg {
+      width: 1669px;
+      height: 1264px;
+      position: absolute;
+      left: -48px;
+      top: 1578px;
+    }
+    .btn-photos-text {
+      position: absolute;
+      left: 710px;
+      top: 3868px;
+      font-size: 48px;
+      font-family: "Hermeneus One", sans-serif;
+      font-weight: 400;
+      color: white;
+    }
+
+
+    .btn-photos {
+      width: 259px;
+      height: 80px;
+      position: absolute;
+      left: 631px;
+      top: 3865px;
+      background: #DC343C;
+      border-radius: 40px;
+    }
+
+    /* Footer */
+    .footer-img {
+      width: 1440px;
+      height: 408px;
+      position: absolute;
+      left: 0;
+      top: 4243px;
+    }
+  </style>
+</head>
+<body>
+  <div class="exchange-page">
+    <!-- Fondo principal -->
+    <img class="bg-main" src="https://placehold.co/1440x2130" alt="Fondo principal" />
+
+    <!-- Barra superior -->
+    <div class="top-bar"></div>
+    <img class="logo" src="https://placehold.co/301x106" alt="Logo" />
+    <img class="menu-icon" src="https://placehold.co/75x75" alt="Icono menú" />
+
+    <!-- Título -->
+    <h1 class="exchange-title">Intercambio a EEUU</h1>
+
+    <!-- Tarjeta izquierda -->
+    <div class="card-left"></div>
+    <img class="card-left-img" src="https://placehold.co/393x215" alt="Intercambio imagen" />
+    <div class="card-left-overlay"></div>
+    <div class="card-left-text">Intercambio</div>
+
+    <!-- Tarjeta derecha -->
+    <img class="card-right-img" src="https://placehold.co/393x215" alt="EEUU imagen" />
+    <div class="card-right-overlay"></div>
+    <div class="card-right-text">EEUU</div>
+
+    <!-- Imagen grande central -->
+    <img class="main-photo" src="https://placehold.co/828x600" alt="Foto intercambio" />
+
+    <!-- Texto descriptivo -->
+    <div class="description">
+      La Scuola realiza varios intercambios culturales y deportivos: <br/>
+      los alumnos de 6º año de Primaria/1ª Media con Park Tudor School, <br/>
+      Indianapolis (USA);<br/>
+      los alumnos de 6º año de Primaria y Secundaria I Ciclo participan del intercambio con el Instituto CCI de Olivos (Buenos Aires)<br/>
+      en el marco de los Juegos de la Juventud organizados por el CONI (Comitato Olimpico Nazionale Italiano);<br/>
+      alumnos de las clases II e III del Liceo Italiano con el Instituto Tosi de Busto Arsizio (Italia).<br/>
+    </div>
+
+    <!-- Imagen adicional -->
+    <img class="small-icon" src="https://placehold.co/114x150" alt="Icono pequeño" />
+    <img class="large-bg" src="https://placehold.co/1669x1264" alt="Imagen secundaria" />
+
+    <!-- Botón fotos -->
+     
+    <a href="intercambioArgFotos.html" class="btn-photos">
+        <span class="btn-photos-text">Fotos</span>
+        
+</a>
+
+
+    <!-- Footer -->
+    <img class="footer-img" src="https://placehold.co/1440x408" alt="Footer" />
+  </div>
+</body>
+</html>

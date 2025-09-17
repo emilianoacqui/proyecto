@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diseño Scuola</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      font-family: Ubuntu, sans-serif; 
+      background: white;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      width: 100vw;
+      height: calc(100vw * 4463 / 1369);
+      max-width: 1369px;
+      max-height: 4463px;
+      position: relative;
+      margin: 0 auto;
+      background: white;
+      transform-origin: top center;
+    }
+    
+    @media (min-width: 1370px) {
+      .container { transform: scale(calc(100vw / 1369)); }
+    }
+    
+    .abs { position: absolute; }
+    
+    /* Fondos */
+    .bg { width: 100.07%; height: 23.4%; left: 0; top: -0.13%; }
+    .overlay { width: 105.2%; height: 4.48%; left: 0; top: 0; opacity: 0.5; background: #0A2452; }
+    .gradient { width: 100.07%; height: 54.8%; left: 0; top: 23.3%; background: linear-gradient(178deg, #1B2F6F 0%, white 100%); }
+    .blue-box { width: 56.1%; height: 11.2%; left: 0.95%; top: 48.9%; background: #1B2F6F; border-radius: 2.9%; }
+    
+    /* Imágenes */
+    .logo { width: 21.9%; height: auto; left: 3.4%; top: 1.05%; }
+    .icon-top { width: 5.5%; height: auto; left: 92%; top: 1.75%; }
+    .extra { width: 8.3%; height: auto; left: 85.3%; top: 83.3%; }
+    .main-img { width: 58.7%; height: auto; left: 3.3%; top: 50%; border-radius: 2.9%; }
+    .testimonial-icon { width: 7%; height: auto; left: 76.9%; top: 76.6%; }
+    
+    /* Textos */
+    .text-white { color: white; font-size: clamp(20px, 3.5vw, 48px); font-weight: 400; }
+    .text-white.left { left: 5.8%; top: 30.1%; width: 40%; }
+    .text-white.right { left: 67.8%; top: 50.2%; width: 30%; }
+    
+    .name { left: 37.1%; top: 76%; color: #373737; font-size: clamp(20px, 3.5vw, 48px); }
+    .desc { left: 37.1%; top: 78%; color: #716E6E; font-size: clamp(16px, 2.8vw, 38px); }
+    .rating { left: 74.2%; top: 76.8%; color: #969393; font-size: clamp(28px, 4.7vw, 64px); }
+    
+    /* Cajas grises */
+    .grey { background: #D9D9D9; border-radius: 1.1%; height: 5.9%; top: 75%; }
+    .grey.center { width: 68.5%; left: 17.9%; }
+    .grey.right { width: 26.5%; left: 96.1%; }
+    .grey.left { width: 25%; left: -16.9%; }
+    
+    /* Tags */
+    .tag { 
+      height: 1.08%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      font: 900 clamp(10px, 1.1vw, 15px) 'Crimson Pro', serif; 
+      letter-spacing: 0.5px; 
+      top: 25.1%;
+    }
+    .tag.red { width: 10.2%; left: 81.7%; color: #DC343C; }
+    .tag.mid { width: 19.3%; left: 42.6%; color: #716E6E; }
+    .tag.left-tag { width: 23%; left: 5.8%; color: #716E6E; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="abs bg" src="https://placehold.co/1370x1044">
+    <div class="abs overlay"></div>
+    <img class="abs logo" src="https://placehold.co/300x106">
+    <img class="abs icon-top" src="https://placehold.co/75x75">
+    <img class="abs extra" src="https://placehold.co/114x150">
+    <div class="abs gradient"></div>
+    <div class="abs blue-box"></div>
+    <img class="abs main-img" src="https://placehold.co/803x534">
+    
+    <div class="abs text-white left">AAAAAAAAaaaa<br>aaaaaaaaaaaaaaa<br>aaa<br>AAAAAAAAaaaa<br>aaaaaaaaaaaaaaa<br>aaaAAAAAAAAaaaa<br>aaaaaaaaaaaaaaa<br>aaa</div>
+    <div class="abs text-white right">AAAAAAAAaaaa<br>aaaaaaaaaaaaaaa<br>aaa<br>AAAAAAAAaaaa<br>aaaaaaaaaaaaaaa<br>aaaAAAAAAAAaaaa<br>aaaaaaaaaaaaaaa<br>aaa</div>
+    
+    <div class="abs grey center"></div>
+    <div class="abs grey right"></div>
+    <div class="abs grey left"></div>
+    
+    <div class="abs name">Javier Alonzo</div>
+    <div class="abs desc">Institucion que me dio<br>mucho en mi vida</div>
+    <div class="abs rating">5</div>
+    <img class="abs testimonial-icon" src="https://placehold.co/96x96">
+    
+    <div class="abs tag red">Scuola Paradiso Ecologico</div>
+    <div class="abs tag mid">Heliopolis</div>
+    <div class="abs tag left-tag">Arccimboldo</div>
+  </div>
+</body>
+</html>
