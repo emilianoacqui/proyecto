@@ -555,10 +555,9 @@
   <button class="btn btn-danger btn-small" onclick="setModo('eliminar')">🗑️ Eliminar</button>
   <div id="edit-page-btn-container" style="margin: 40px 0 20px 0; display: none;">
   <button class="btn btn-success" style="width: 100%; font-size: 16px;"
-        onclick="openFullPageEditor()">
-  ✏️ Editar Página Completa
-</button>
-
+        onclick="goToIndexDirectly()">
+    🌐 Ir a Sitio Principal
+  </button>
 </div>
 
 </div>
@@ -651,7 +650,7 @@
 
 function openInSite(pageId) {
   // Abrir la página específica en modo visualización
-  window.open('index.html?page=' + pageId, '_blank');
+  window.open('index.html?cms_admin_token=true&page_id=' + pageId, '_blank');
 }
 
 
@@ -660,8 +659,8 @@ function openInSite(pageId) {
     alert("Primero selecciona una página para editar.");
     return;
   }
-  // Abrir para editar la página específica en modo administrador
-  window.open('index.html?page=' + editingPageId + '&cms_admin=1', '_blank');
+  // Abrir el index con los parámetros para editar
+  window.open('index.html?cms_admin_token=true&page_id=' + editingPageId, '_blank');
 }
 
     function setModo(modo) {
@@ -1226,8 +1225,9 @@ function openInSite(pageId) {
     function editPage(pageId) {
   const page = savedPages.find(p => p.id === pageId);
   if (!page) return;
-  editingPageId = pageId;
-
+  
+  editingPageId = pageId; // Esto debe estar aquí
+  
   // Cambiar a sección "Agregar"
   showSection('agregar');
   
@@ -1295,6 +1295,9 @@ function openInSite(pageId) {
     if (document.getElementById('pages-list')) loadPagesList();
   }
 });
+function goToIndexDirectly() {
+  window.open('index.html?cms_admin_token=true', '_blank');
+}
 
   </script>
 </body>

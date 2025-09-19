@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scuola Italiana di Montevideo</title>
     <style>
+
+        body.loading-cms-content .header,
+body.loading-cms-content .education-levels,
+body.loading-cms-content .color-stripes,
+body.loading-cms-content .about-section,
+body.loading-cms-content .quality-section,
+body.loading-cms-content .projects-section,
+body.loading-cms-content .news-section,
+body.loading-cms-content .footer-links,
+body.loading-cms-content .footer-bottom {
+  display: none;
+}
+
+#cms-root {
+  min-height: 100vh;
+}
         * {
             margin: 0;
             padding: 0;
@@ -542,10 +558,6 @@
         .footer-card.green::before { background: #049B4C; }
         .footer-card.dark-blue::before { background: #0A2452; }
 
-        .footer-bottom {
-            height: 408px;
-            background: url('https://placehold.co/1440x408') center/cover;
-        }
 
         .footer-logo {
             position: absolute;
@@ -577,410 +589,389 @@
         }
     </style>
 </head>
+
+<script src="cms-admin.js"></script>
 <body>
     <div class="container">
-        <!-- Header Section -->
-        <header class="header">
-            <div class="header-overlay"></div>
-            <div class="logo">
-                <img src="fotos/logo.png" alt="Logo Scuola Italiana" style="width:100%;height:100%;object-fit:contain;">
-            </div>
-            <div class="user-icon"></div>
-            
-            <div class="hero-content">
-                <h1 class="hero-title">Una nueva visión de la educación.<br> La Scuola aperta al mondo</h1>
-                <a href="#" class="admissions-btn">Admisiones</a>
-            </div>
-        </header>
         <div id="cms-root"></div>
-
-        <!-- Education Levels Section -->
-        <section class="education-levels">
-            <div class="level-card inicial">
-                <div class="level-content">
-                    <h2 class="level-title">Inicial</h2>
-                    <p class="level-age">3 meses a 5 años</p>
-                    <a href="#" class="level-btn btn-green">Ver mas</a>
-                </div>
-            </div>
-            <div class="level-card primaria">
-                <div class="level-content">
-                    <h2 class="level-title">Primaria</h2>
-                    <p class="level-age">6 a 12 años</p>
-                    <a href="#" class="level-btn btn-gray">Ver Mas</a>
-                </div>
-            </div>
-            <div class="level-card secundaria">
-                <div class="level-content">
-                    <h2 class="level-title">Secundaria</h2>
-                    <p class="level-age">12 a 18 años</p>
-                    <a href="#" class="level-btn btn-red">Ver mas</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Color Stripes -->
-        <div class="color-stripes">
-            <div class="stripe stripe-blue"></div>
-            <div class="stripe stripe-green"></div>
-            <div class="stripe stripe-gray"></div>
-            <div class="stripe stripe-red"></div>
-        </div>
-
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="about-image">
-                <img src="https://placehold.co/442x350" alt="Sobre nosotros">
-            </div>
-            <div class="about-content">
-                <h2 class="section-title-small">SOBRE NOSOTROS</h2>
-                <p class="about-text">La Scuola Italiana di Montevideo desarrolla un programa educativo nacional e internacional que abre las puertas a un mundo plurilingüe y multicultural.</p>
-                <a href="#" class="read-more-btn">Leer Mas -></a>
-            </div>
-        </section>
-
-        <!-- Institutional Quality Section -->
-        <section class="quality-section">
-    <div class="quality-content">
-        <h2 class="main-title">Calidad Institucional</h2>
         
-        <div class="quality-grid">
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/lapiz.png" alt="Cursos">
+        <!-- Contenido original del index (solo se muestra si no hay page_id) -->
+        <div id="original-content">
+            <!-- Header Section -->
+            <header class="header">
+                <div class="header-overlay"></div>
+                <div class="logo">
+                    <img src="fotos/logo.png" alt="Logo Scuola Italiana" style="width:100%;height:100%;object-fit:contain;">
                 </div>
-                <p class="quality-text">Cursos extracurriculares</p>
-            </div>
-            
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/personas.png" alt="Convivencia">
+                <div class="user-icon"></div>
+                
+                <div class="hero-content">
+                    <h1 class="hero-title">Una nueva visión de la educación.<br> La Scuola aperta al mondo</h1>
+                    <a href="#" class="admissions-btn">Admisiones</a>
                 </div>
-                <p class="quality-text">Convivencia<br> en el colegio</p>
-            </div>
-            
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/futbol.png" alt="Deportes">
-                </div>
-                <p class="quality-text">Deportes</p>
-            </div>
-            
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/ciudadania.png" alt="Liderazgo">
-                </div>
-                <p class="quality-text">Liderazgo, voluntariado,<br> ciudadanía activa</p>
-            </div>
-            
-            <div class="center-circle">
-                <img src="fotos/loguito.png" alt="Centro Calidad Institucional">
-            </div>
-            
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/arte.png" alt="Arte">
-                </div>
-                <p class="quality-text">Arte, ciencia<br> y tecnologia</p>
-            </div>
-            
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/estudio.png" alt="Idiomas">
-                </div>
-                <p class="quality-text">Idiomas</p>
-            </div>
-            
-            <div class="quality-item">
-                <div class="quality-icon">
-                    <img src="fotos/intercambio.png" alt="Intercambios">
-                </div>
-                <p class="quality-text">Intercambios</p>
-            </div>
-            
-            <div class="quality-item ecologica">
-    <div class="quality-icon">
-        <img src="fotos/ecologia.png" alt="Ecológica">
-    </div>
-    <p class="quality-text">Propuesta<br> ecologica</p>
-</div>
+            </header>
 
+            <!-- Education Levels Section -->
+            <section class="education-levels">
+                <div class="level-card inicial">
+                    <div class="level-content">
+                        <h2 class="level-title">Inicial</h2>
+                        <p class="level-age">3 meses a 5 años</p>
+                        <a href="#" class="level-btn btn-green">Ver mas</a>
+                    </div>
+                </div>
+                <div class="level-card primaria">
+                    <div class="level-content">
+                        <h2 class="level-title">Primaria</h2>
+                        <p class="level-age">6 a 12 años</p>
+                        <a href="#" class="level-btn btn-gray">Ver Mas</a>
+                    </div>
+                </div>
+                <div class="level-card secundaria">
+                    <div class="level-content">
+                        <h2 class="level-title">Secundaria</h2>
+                        <p class="level-age">12 a 18 años</p>
+                        <a href="#" class="level-btn btn-red">Ver mas</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Color Stripes -->
+            <div class="color-stripes">
+                <div class="stripe stripe-blue"></div>
+                <div class="stripe stripe-green"></div>
+                <div class="stripe stripe-gray"></div>
+                <div class="stripe stripe-red"></div>
+            </div>
+
+            <!-- About Section -->
+            <section class="about-section">
+                <div class="about-image">
+                    <img src="https://placehold.co/442x350" alt="Sobre nosotros">
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title-small">SOBRE NOSOTROS</h2>
+                    <p class="about-text">La Scuola Italiana di Montevideo desarrolla un programa educativo nacional e internacional que abre las puertas a un mundo plurilingüe y multicultural.</p>
+                    <a href="#" class="read-more-btn">Leer Mas -></a>
+                </div>
+            </section>
+
+            <!-- Institutional Quality Section -->
+            <section class="quality-section">
+                <div class="quality-content">
+                    <h2 class="main-title">Calidad Institucional</h2>
+                    
+                    <div class="quality-grid">
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/lapiz.png" alt="Cursos">
+                            </div>
+                            <p class="quality-text">Cursos extracurriculares</p>
+                        </div>
+                        
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/personas.png" alt="Convivencia">
+                            </div>
+                            <p class="quality-text">Convivencia<br> en el colegio</p>
+                        </div>
+                        
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/futbol.png" alt="Deportes">
+                            </div>
+                            <p class="quality-text"><a href="menudeportes.html">Deportes</a></p>
+                        </div>
+                        
+  
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/ciudadania.png" alt="Liderazgo">
+                            </div>
+                            <p class="quality-text">Liderazgo, voluntariado,<br> ciudadanía activa</p>
+                        </div>
+                        
+                        <div class="center-circle">
+                            <img src="fotos/loguito.png" alt="Centro Calidad Institucional">
+                        </div>
+                        
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/arte.png" alt="Arte">
+                            </div>
+                            <p class="quality-text">Arte, ciencia<br> y tecnologia</p>
+                        </div>
+                        
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/estudio.png" alt="Idiomas">
+                            </div>
+                            <p class="quality-text">Idiomas</p>
+                        </div>
+                        
+                        <div class="quality-item">
+                            <div class="quality-icon">
+                                <img src="fotos/intercambio.png" alt="Intercambios">
+                            </div>
+                            <p class="quality-text">Intercambios</p>
+                        </div>
+                        
+                        <div class="quality-item ecologica">
+                            <div class="quality-icon">
+                                <img src="fotos/ecologia.png" alt="Ecológica">
+                            </div>
+                            <p class="quality-text">Propuesta<br> ecologica</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="projects-section">
+                <h2 class="projects-title">Nuestros Proyectos</h2>
+                
+                <div class="projects-grid">
+                    <div class="project-item">
+                        <div class="project-content">
+                            <h3 class="project-title">Arcimboldo</h3>
+                            <p class="project-description">Se trata de una propuesta multidisciplinaria dirigida a estudiantes de 6o año de Ciencias Biológicas y Social-Económico, integrando contenidos de italiano, matemática, literatura, biología y química.</p>
+                            <a href="#" class="project-btn">Boton</a>
+                        </div>
+                        <div class="project-image">
+                            <img src="https://placehold.co/516x344" alt="Arcimboldo">
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-content">
+                            <h3 class="project-title">Heliopolis</h3>
+                            <p class="project-description">En el marco del proyecto "Heliópolis" cuyo objetivo es investigar sobre la figura de Francisco Piria y sus conexiones con la alquimia y el estudio de la astronomía los alumnos visitan la ciudad de Piriápolis.</p>
+                            <a href="#" class="project-btn">Ver Mas</a>
+                        </div>
+                        <div class="project-image">
+                            <img src="https://placehold.co/487x344" alt="Heliopolis">
+                        </div>
+                    </div>
+                    
+                    <div class="project-item">
+                        <div class="project-content">
+                            <h3 class="project-title">Scuola paradiso ecologico</h3>
+                            <p class="project-description">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                            <a href="#" class="project-btn">Boton</a>
+                        </div>
+                        <div class="project-image">
+                            <img src="https://placehold.co/541x344" alt="Scuola paradiso">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- News Section -->
+            <section class="news-section">
+                <div class="news-header">
+                    <h2 class="news-title">Noticias</h2>
+                    <p class="news-subtitle">Destacadas</p>
+                </div>
+                
+                <div class="news-grid">
+                    <div class="news-card">
+                        <img src="https://placehold.co/317x238" alt="Noticia 1">
+                        <div class="news-card-content">
+                            <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                            <a href="#" class="news-card-btn">Boton</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <img src="https://placehold.co/317x238" alt="Noticia 2">
+                        <div class="news-card-content">
+                            <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                            <a href="#" class="news-card-btn">Boton</a>
+                        </div>
+                    </div>
+                    
+                    <div class="news-card">
+                        <img src="https://placehold.co/317x238" alt="Noticia 3">
+                        <div class="news-card-content">
+                            <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
+                            <a href="#" class="news-card-btn">Boton</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer Links -->
+            <section class="footer-links">
+                <div class="footer-grid">
+                    <div class="footer-card blue">
+                        <img src="https://placehold.co/222x257" alt="Acceso a familia">
+                        <div class="footer-card-content">Acceso a<br>familia</div>
+                    </div>
+                    
+                    <div class="footer-card red">
+                        <img src="https://placehold.co/222x257" alt="Comunidad Exalumnos">
+                        <div class="footer-card-content">Comunidad<br>Exalumnos</div>
+                    </div>
+                    
+                    <div class="footer-card yellow">
+                        <img src="https://placehold.co/222x257" alt="Scuola Club">
+                        <div class="footer-card-content">Scuola Club</div>
+                    </div>
+                    
+                    <div class="footer-card green">
+                        <img src="https://placehold.co/222x257" alt="Noticias">
+                        <div class="footer-card-content">Noticias</div>
+                    </div>
+                    
+                    <div class="footer-card dark-blue">
+                        <img src="https://placehold.co/222x257" alt="Cursos de idioma">
+                        <div class="footer-card-content">Cursos de<br>idioma</div>
+                    </div>
+                    
+                    <div class="footer-card red">
+                        <img src="https://placehold.co/222x257" alt="Trabaja con nosotros">
+                        <div class="footer-card-content">Trabaja con<br>nosotros</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer Bottom -->
+            <footer class="footer-bottom">
+                <div class="footer-logo"></div>
+            </footer>
         </div>
     </div>
-</section>
 
-
-
-        <!-- Projects Section -->
-        <section class="projects-section">
-            <h2 class="projects-title">Nuestros Proyectos</h2>
-            
-            <div class="projects-grid">
-                <div class="project-item">
-                    <div class="project-content">
-                        <h3 class="project-title">Arcimboldo</h3>
-                        <p class="project-description">Se trata de una propuesta multidisciplinaria dirigida a estudiantes de 6o año de Ciencias Biológicas y Social-Económico, integrando contenidos de italiano, matemática, literatura, biología y química.</p>
-                        <a href="#" class="project-btn">Boton</a>
-                    </div>
-                    <div class="project-image">
-                        <img src="https://placehold.co/516x344" alt="Arcimboldo">
-                    </div>
-                </div>
-                
-                <div class="project-item">
-                    <div class="project-content">
-                        <h3 class="project-title">Heliopolis</h3>
-                        <p class="project-description">En el marco del proyecto "Heliópolis" cuyo objetivo es investigar sobre la figura de Francisco Piria y sus conexiones con la alquimia y el estudio de la astronomía los alumnos visitan la ciudad de Piriápolis.</p>
-                        <a href="#" class="project-btn">Ver Mas</a>
-                    </div>
-                    <div class="project-image">
-                        <img src="https://placehold.co/487x344" alt="Heliopolis">
-                    </div>
-                </div>
-                
-                <div class="project-item">
-                    <div class="project-content">
-                        <h3 class="project-title">Scuola paradiso ecologico</h3>
-                        <p class="project-description">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                        <a href="#" class="project-btn">Boton</a>
-                    </div>
-                    <div class="project-image">
-                        <img src="https://placehold.co/541x344" alt="Scuola paradiso">
-                    </div>
-                </div>
+    <!-- Footer Bottom -->
+<footer class="footer-bottom-new">
+    <div class="footer-container">
+        <div class="footer-left">
+            <div class="footer-logo">
+                <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo" style="height: 60px;">
             </div>
-        </section>
-
-        <!-- News Section -->
-        <section class="news-section">
-            <div class="news-header">
-                <h2 class="news-title">Noticias</h2>
-                <p class="news-subtitle">Destacadas</p>
+            <div class="footer-subtitle">
+                <p>AMC Scuola Italiana di Montevideo</p>
             </div>
-            
-            <div class="news-grid">
-                <div class="news-card">
-                    <img src="https://placehold.co/317x238" alt="Noticia 1">
-                    <div class="news-card-content">
-                        <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                        <a href="#" class="news-card-btn">Boton</a>
-                    </div>
-                </div>
-                
-                <div class="news-card">
-                    <img src="https://placehold.co/317x238" alt="Noticia 2">
-                    <div class="news-card-content">
-                        <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                        <a href="#" class="news-card-btn">Boton</a>
-                    </div>
-                </div>
-                
-                <div class="news-card">
-                    <img src="https://placehold.co/317x238" alt="Noticia 3">
-                    <div class="news-card-content">
-                        <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                        <a href="#" class="news-card-btn">Boton</a>
-                    </div>
-                </div>
+        </div>
+        
+        <div class="footer-center">
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p>Av. Brasil 3149, Montevideo</p>
+                <p>(+598) 2621 4822 / 2622 1422</p>
+                <p>info@scuolaitaliana.edu.uy</p>
             </div>
-        </section>
-
-        <!-- Footer Links -->
-        <section class="footer-links">
-            <div class="footer-grid">
-                <div class="footer-card blue">
-                    <img src="https://placehold.co/222x257" alt="Acceso a familia">
-                    <div class="footer-card-content">Acceso a<br>familia</div>
-                </div>
-                
-                <div class="footer-card red">
-                    <img src="https://placehold.co/222x257" alt="Comunidad Exalumnos">
-                    <div class="footer-card-content">Comunidad<br>Exalumnos</div>
-                </div>
-                
-                <div class="footer-card yellow">
-                    <img src="https://placehold.co/222x257" alt="Scuola Club">
-                    <div class="footer-card-content">Scuola Club</div>
-                </div>
-                
-                <div class="footer-card green">
-                    <img src="https://placehold.co/222x257" alt="Noticias">
-                    <div class="footer-card-content">Noticias</div>
-                </div>
-                
-                <div class="footer-card dark-blue">
-                    <img src="https://placehold.co/222x257" alt="Cursos de idioma">
-                    <div class="footer-card-content">Cursos de<br>idioma</div>
-                </div>
-                
-                <div class="footer-card red">
-                    <img src="https://placehold.co/222x257" alt="Trabaja con nosotros">
-                    <div class="footer-card-content">Trabaja con<br>nosotros</div>
-                </div>
+        </div>
+        
+        <div class="footer-right">
+            <div class="footer-section">
+                <h4>Enlaces útiles</h4>
+                <p>Política de privacidad</p>
+                <p>Requisitos técnicos</p>
+                <p>Accesibilidad</p>
             </div>
-        </section>
-  
-</div>
-
-        <!-- Footer Bottom -->
-        <footer class="footer-bottom">
-            <div class="footer-logo"></div>
-        </footer>
+        </div>
     </div>
+    
+    <div class="footer-info-bar">
+        <p>Desarrollado por el equipo SGE | Proyecto de apoyo 2002 - EE Informática</p>
+    </div>
+</footer>
 
-    <style>
-  /* Barra flotante CMS */
-  #cms-bar { position: fixed; top: 12px; right: 12px; z-index: 99999; display:flex; gap:8px; }
-  .cms-btn {
-    background:#3498db; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12); font-weight:600;
-  }
-  .cms-btn.save { background:#27ae60; }
-  .cms-btn.cancel { background:#e74c3c; }
-  .cms-btn.hidden { display:none; }
-  /* Indicador de edición para imágenes */
-  .cms-edit-outline { outline: 3px dashed #3498db; outline-offset: 4px; cursor: pointer; }
+<style>
+.footer-bottom-new {
+    background: #1B4F72;
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo img {
+    height: 60px;
+    width: auto;
+}
+
+.footer-subtitle p {
+    margin: 0;
+    font-size: 14px;
+    color: #E8E8E8;
+}
+
+.footer-center,
+.footer-right {
+    flex: 1;
+    padding: 0 20px;
+}
+
+.footer-section h4 {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 5px;
+}
+
+.footer-section p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #E8E8E8;
+    line-height: 1.4;
+}
+
+.footer-info-bar {
+    background: #154360;
+    text-align: center;
+    padding: 15px 5%;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-info-bar p {
+    margin: 0;
+    font-size: 12px;
+    color: #BDC3C7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-left {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-center,
+    .footer-right {
+        padding: 0;
+        width: 100%;
+    }
+    
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
 </style>
-
-<script>
-(function(){
-  // --- Configuración ---
-  const params = new URLSearchParams(location.search);
-  const editId = params.get('cms_edit');
-  const isAdmin = params.get('cms_admin') === '1';
-
-if (!editId || !isAdmin) return;
-
-  let savedPages = JSON.parse(localStorage.getItem('savedPages')) || [];
-  const pageObj = savedPages.find(p => String(p.id) === String(editId)) || null;
-  const root = document.getElementById('cms-root') || document.body;
-
-  if(pageObj && pageObj.content) {
-    root.innerHTML = pageObj.content;
-  }
-
-  // Barra flotante CMS
-  const bar = document.createElement('div');
-  bar.id = 'cms-bar';
-  bar.innerHTML = `
-    <button id="cms-toggle-btn" class="cms-btn">✏️ Editar contenido</button>
-    <button id="cms-save-btn" class="cms-btn save hidden">💾 Guardar</button>
-    <button id="cms-cancel-btn" class="cms-btn cancel hidden">✖ Cancelar</button>
-  `;
-  document.body.appendChild(bar);
-
-  const toggleBtn = document.getElementById('cms-toggle-btn');
-  const saveBtn = document.getElementById('cms-save-btn');
-  const cancelBtn = document.getElementById('cms-cancel-btn');
-
-  let editing = false;
-  let originalSnapshot = root.innerHTML;
-
-  function changeImageHandler(e) {
-    e.preventDefault(); e.stopPropagation();
-    const img = e.currentTarget;
-    const newUrl = prompt('Ingresa la URL de la nueva imagen:', img.src);
-    if(newUrl) img.src = newUrl;
-  }
-
-  function enterEditMode() {
-    editing = true;
-    toggleBtn.textContent = '🔒 Salir edición';
-    saveBtn.classList.remove('hidden');
-    cancelBtn.classList.remove('hidden');
-    originalSnapshot = root.innerHTML;
-
-    document.querySelectorAll('#cms-root .editable-text').forEach(el => {
-      el.setAttribute('contenteditable','true');
-      el.style.outline='2px dashed rgba(52,152,219,0.25)';
-    });
-
-    document.querySelectorAll('#cms-root .editable-image').forEach(img => {
-      img.classList.add('cms-edit-outline');
-      img.addEventListener('click', changeImageHandler);
-      img.style.cursor='pointer';
-    });
-  }
-
-  function exitEditMode() {
-    editing = false;
-    toggleBtn.textContent = '✏️ Editar contenido';
-    saveBtn.classList.add('hidden');
-    cancelBtn.classList.add('hidden');
-
-    document.querySelectorAll('#cms-root .editable-text').forEach(el => {
-      el.removeAttribute('contenteditable');
-      el.style.outline='';
-    });
-
-    document.querySelectorAll('#cms-root .editable-image').forEach(img => {
-      img.classList.remove('cms-edit-outline');
-      img.removeEventListener('click', changeImageHandler);
-      img.style.cursor='';
-    });
-  }
-
-  toggleBtn.addEventListener('click', () => editing ? exitEditMode() : enterEditMode());
-
-  cancelBtn.addEventListener('click', () => {
-    if(confirm('Descartar cambios realizados en esta página?')) {
-      root.innerHTML = originalSnapshot;
-      exitEditMode();
-    }
-  });
-
-  saveBtn.addEventListener('click', () => {
-    const newContent = root.innerHTML;
-    const idx = savedPages.findIndex(p => String(p.id) === String(editId));
-
-    if(idx !== -1){
-      savedPages[idx].content = newContent;
-      savedPages[idx].lastModified = new Date().toLocaleString();
-    } else {
-      savedPages.push({
-        id: editId,
-        template: 'manual',
-        name: 'Página manual',
-        content: newContent,
-        created: new Date().toLocaleString(),
-        lastModified: new Date().toLocaleString()
-      });
-    }
-
-    localStorage.setItem('savedPages', JSON.stringify(savedPages));
-    alert('Cambios guardados correctamente');
-    exitEditMode();
-  });
-})();
-
-    try {
-      if(window.opener && !window.opener.closed) {
-        window.opener.postMessage({ type: 'cms_saved', id: editId }, location.origin);
-      }
-    } catch(e) {
-      console.warn('No se pudo notificar al gestor:', e);
-    }
-
-    alert('Cambios guardados correctamente');
-    exitEditMode();
-  });
-
-  // Si la página fue abierta desde gestor, podemos restaurar estilos iniciales, etc.
-  // (Listener para mensajes entrantes - por si querés extender)
-  window.addEventListener('message', (ev) => {
-    if(ev.origin !== location.origin) return;
-    // ejemplo: ev.data = { type: 'refresh' } ...
-  });
-})();
-
-const toolbar = document.createElement('div');
-toolbar.innerHTML = `
-  <button onclick="window.history.back()">⬅️ Volver</button>
-  <button onclick="saveChanges()">💾 Guardar</button>
-`
-document.body.prepend(toolbar);
-
-</script>
 
 </body>
 </html>
