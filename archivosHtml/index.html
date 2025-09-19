@@ -247,7 +247,7 @@
             padding: 100px 5%;
             text-align: center;
             position: relative;
-            background-image: src('fotos/calidadinstitucional.png');
+            background-image: url('fotos/calidadinstitucional.png');
             background-size: cover;
             background-position: center;
         }
@@ -592,6 +592,7 @@
                 <a href="#" class="admissions-btn">Admisiones</a>
             </div>
         </header>
+        <div id="cms-root"></div>
 
         <!-- Education Levels Section -->
         <section class="education-levels">
@@ -818,11 +819,168 @@
                 </div>
             </div>
         </section>
+  
+</div>
 
         <!-- Footer Bottom -->
         <footer class="footer-bottom">
             <div class="footer-logo"></div>
         </footer>
     </div>
+
+    <style>
+  /* Barra flotante CMS */
+  #cms-bar { position: fixed; top: 12px; right: 12px; z-index: 99999; display:flex; gap:8px; }
+  .cms-btn {
+    background:#3498db; color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12); font-weight:600;
+  }
+  .cms-btn.save { background:#27ae60; }
+  .cms-btn.cancel { background:#e74c3c; }
+  .cms-btn.hidden { display:none; }
+  /* Indicador de edición para imágenes */
+  .cms-edit-outline { outline: 3px dashed #3498db; outline-offset: 4px; cursor: pointer; }
+</style>
+
+<script>
+(function(){
+  // --- Configuración ---
+  const params = new URLSearchParams(location.search);
+  const editId = params.get('cms_edit');
+  const isAdmin = params.get('cms_admin') === '1';
+
+if (!editId || !isAdmin) return;
+
+  let savedPages = JSON.parse(localStorage.getItem('savedPages')) || [];
+  const pageObj = savedPages.find(p => String(p.id) === String(editId)) || null;
+  const root = document.getElementById('cms-root') || document.body;
+
+  if(pageObj && pageObj.content) {
+    root.innerHTML = pageObj.content;
+  }
+
+  // Barra flotante CMS
+  const bar = document.createElement('div');
+  bar.id = 'cms-bar';
+  bar.innerHTML = `
+    <button id="cms-toggle-btn" class="cms-btn">✏️ Editar contenido</button>
+    <button id="cms-save-btn" class="cms-btn save hidden">💾 Guardar</button>
+    <button id="cms-cancel-btn" class="cms-btn cancel hidden">✖ Cancelar</button>
+  `;
+  document.body.appendChild(bar);
+
+  const toggleBtn = document.getElementById('cms-toggle-btn');
+  const saveBtn = document.getElementById('cms-save-btn');
+  const cancelBtn = document.getElementById('cms-cancel-btn');
+
+  let editing = false;
+  let originalSnapshot = root.innerHTML;
+
+  function changeImageHandler(e) {
+    e.preventDefault(); e.stopPropagation();
+    const img = e.currentTarget;
+    const newUrl = prompt('Ingresa la URL de la nueva imagen:', img.src);
+    if(newUrl) img.src = newUrl;
+  }
+
+  function enterEditMode() {
+    editing = true;
+    toggleBtn.textContent = '🔒 Salir edición';
+    saveBtn.classList.remove('hidden');
+    cancelBtn.classList.remove('hidden');
+    originalSnapshot = root.innerHTML;
+
+    document.querySelectorAll('#cms-root .editable-text').forEach(el => {
+      el.setAttribute('contenteditable','true');
+      el.style.outline='2px dashed rgba(52,152,219,0.25)';
+    });
+
+    document.querySelectorAll('#cms-root .editable-image').forEach(img => {
+      img.classList.add('cms-edit-outline');
+      img.addEventListener('click', changeImageHandler);
+      img.style.cursor='pointer';
+    });
+  }
+
+  function exitEditMode() {
+    editing = false;
+    toggleBtn.textContent = '✏️ Editar contenido';
+    saveBtn.classList.add('hidden');
+    cancelBtn.classList.add('hidden');
+
+    document.querySelectorAll('#cms-root .editable-text').forEach(el => {
+      el.removeAttribute('contenteditable');
+      el.style.outline='';
+    });
+
+    document.querySelectorAll('#cms-root .editable-image').forEach(img => {
+      img.classList.remove('cms-edit-outline');
+      img.removeEventListener('click', changeImageHandler);
+      img.style.cursor='';
+    });
+  }
+
+  toggleBtn.addEventListener('click', () => editing ? exitEditMode() : enterEditMode());
+
+  cancelBtn.addEventListener('click', () => {
+    if(confirm('Descartar cambios realizados en esta página?')) {
+      root.innerHTML = originalSnapshot;
+      exitEditMode();
+    }
+  });
+
+  saveBtn.addEventListener('click', () => {
+    const newContent = root.innerHTML;
+    const idx = savedPages.findIndex(p => String(p.id) === String(editId));
+
+    if(idx !== -1){
+      savedPages[idx].content = newContent;
+      savedPages[idx].lastModified = new Date().toLocaleString();
+    } else {
+      savedPages.push({
+        id: editId,
+        template: 'manual',
+        name: 'Página manual',
+        content: newContent,
+        created: new Date().toLocaleString(),
+        lastModified: new Date().toLocaleString()
+      });
+    }
+
+    localStorage.setItem('savedPages', JSON.stringify(savedPages));
+    alert('Cambios guardados correctamente');
+    exitEditMode();
+  });
+})();
+
+    try {
+      if(window.opener && !window.opener.closed) {
+        window.opener.postMessage({ type: 'cms_saved', id: editId }, location.origin);
+      }
+    } catch(e) {
+      console.warn('No se pudo notificar al gestor:', e);
+    }
+
+    alert('Cambios guardados correctamente');
+    exitEditMode();
+  });
+
+  // Si la página fue abierta desde gestor, podemos restaurar estilos iniciales, etc.
+  // (Listener para mensajes entrantes - por si querés extender)
+  window.addEventListener('message', (ev) => {
+    if(ev.origin !== location.origin) return;
+    // ejemplo: ev.data = { type: 'refresh' } ...
+  });
+})();
+
+const toolbar = document.createElement('div');
+toolbar.innerHTML = `
+  <button onclick="window.history.back()">⬅️ Volver</button>
+  <button onclick="saveChanges()">💾 Guardar</button>
+`
+document.body.prepend(toolbar);
+
+</script>
+
 </body>
 </html>
