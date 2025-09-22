@@ -7,26 +7,30 @@
     if (!isAdmin) return; // Si no es admin, no hacer nada
     
     // NUEVO: Cargar página específica si hay page_id
-    function loadSpecificPage() {
-        if (!pageId) return;
-        
-        const savedPages = JSON.parse(localStorage.getItem('savedPages')) || [];
-        const page = savedPages.find(p => p.id == pageId);
-        
-        if (page && page.content) {
-            // Ocultar contenido original
-            document.body.classList.add('loading-cms-content');
+    // NUEVO: Cargar página específica si hay page_id
+function loadSpecificPage() {
+    if (!pageId) return;
+    
+    // Ocultar contenido original inmediatamente
+    document.body.classList.add('loading-cms-content');
+    
+    const savedPages = JSON.parse(localStorage.getItem('savedPages')) || [];
+    const page = savedPages.find(p => p.id == pageId);
+    
+    if (page && page.content) {
+        // Cargar contenido de la página
+        const cmsRoot = document.getElementById('cms-root');
+        if (cmsRoot) {
+            cmsRoot.innerHTML = page.content;
             
-            // Cargar contenido de la página
-            const cmsRoot = document.getElementById('cms-root');
-            if (cmsRoot) {
-                cmsRoot.innerHTML = page.content;
-                
-                // Actualizar título
-                document.title = page.name + ' - Scuola Italiana di Montevideo';
-            }
+            // Actualizar título
+            document.title = page.name + ' - Scuola Italiana di Montevideo';
         }
+    } else {
+        // Si no hay página, mostrar contenido original
+        document.body.classList.remove('loading-cms-content');
     }
+}
     
     // Crear menú de administrador
     function createAdminMenu() {
