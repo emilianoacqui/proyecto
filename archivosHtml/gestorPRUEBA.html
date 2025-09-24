@@ -252,23 +252,25 @@
     }
 
     .template-container {
-      position: relative;
-      background: white;
-      overflow-x: auto;
-      padding: 20px;
-      max-width: 100%;
-    }
+    position: relative;
+    background: white;
+    overflow-y: auto; /* CAMBIO: permitir scroll vertical */
+    overflow-x: hidden; /* CAMBIO: solo ocultar scroll horizontal */
+    padding: 20px;
+    max-width: 100%;
+}
 
     .template-frame {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      overflow: auto;
-      background: white;
-      position: relative;
-      transform: scale(0.8);
-      transform-origin: top left;
-      width: 125%;
-    }
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow-y: auto; /* CAMBIO: permitir scroll vertical */
+    overflow-x: hidden; /* CAMBIO: solo ocultar scroll horizontal */
+    background: white;
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin-bottom: 20px;
+}
 
     /* Editable content styles */
     .editable-text {
@@ -404,6 +406,15 @@
       color: #0c5460;
       border: 1px solid #bee5eb;
     }
+    .btn.active {
+  background: #2c3e50;
+  color: white;
+}
+
+.btn-small.active {
+  background: #2c3e50;
+  color: white;
+}
   </style>
 </head>
 <body>
@@ -546,10 +557,9 @@
   <button class="btn btn-danger btn-small" onclick="setModo('eliminar')">🗑️ Eliminar</button>
   <div id="edit-page-btn-container" style="margin: 40px 0 20px 0; display: none;">
   <button class="btn btn-success" style="width: 100%; font-size: 16px;"
-        onclick="window.open('index.html?cms_admin=1', '_blank')">
-  ✏️ Editar Página Completa
-</button>
-
+        onclick="goToIndexDirectly()">
+    🌐 Ir a Sitio Principal
+  </button>
 </div>
 
 </div>
@@ -629,10 +639,20 @@
     let currentEditingImage = null;
     let editingPageId = null; 
 
-function openInSite(pageId, admin = false) {
-  let url = 'index.html?cms_edit=' + pageId;
-  if (admin) url += '&cms_admin=1';
-  window.open(url, '_blank');
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+  addToHistory('Sistema iniciado', 'Gestor de contenido cargado correctamente');
+  console.log('Gestor de contenido iniciado');
+  
+  // Inicializar modo activo
+  setModo('editar');
+});
+
+
+function openInSite(pageId) {
+  // Abrir la página específica en modo visualización
+  window.open('index.html?cms_admin_token=true&page_id=' + pageId, '_blank');
 }
 
 
@@ -641,75 +661,625 @@ function openInSite(pageId, admin = false) {
     alert("Primero selecciona una página para editar.");
     return;
   }
-  // Abrir index.html con el parámetro de edición
-  window.open('index.html?cms_edit=' + editingPageId, '_blank');
+  // Abrir el index con los parámetros para editar
+  window.open('index.html?cms_admin_token=true&page_id=' + editingPageId, '_blank');
 }
 
     function setModo(modo) {
   modoActual = modo;
   loadPagesList(); // refrescar la lista
-  // Mostrar u ocultar botón de "Editar Página Completa"
-  const btnContainer = document.getElementById('edit-page-btn-container');
+  
+  // Actualizar texto de botones
+  const editBtn = document.querySelector('[onclick="setModo(\'editar\')"]');
+  const deleteBtn = document.querySelector('[onclick="setModo(\'eliminar\')"]');
+  
   if (modo === "editar") {
-    btnContainer.style.display = "block";
+    editBtn.classList.add('active');
+    deleteBtn.classList.remove('active');
+    document.getElementById('edit-page-btn-container').style.display = "block";
   } else {
-    btnContainer.style.display = "none";
+    editBtn.classList.remove('active');
+    deleteBtn.classList.add('active');
+    document.getElementById('edit-page-btn-container').style.display = "none";
   }
 }
 
-    const templates = {
-      deportes: {
-        name: 'Plantilla Deportes',
-        html: `
-          <div class="pagina">
-            <img class="fondo-principal editable-image" src="https://placehold.co/1440x1319" alt="Fondo principal" />
-            <div class="seccion-azul"></div>
-            <div class="overlay"></div>
-            <img class="logo editable-image" src="https://placehold.co/301x106" alt="Logo" />
-            <img class="icono editable-image" src="https://placehold.co/75x75" alt="Ícono" />
+   const templates = {
+      // Reemplazar la plantilla deportes en el objeto templates con esta versión editable:
 
-            <section class="bloque bloque-rojo">
-              <div class="rectangulo-rojo"></div>
-              <img class="imagen-roja editable-image" src="https://placehold.co/1024x712" alt="Imagen Atletismo" />
-              <h2 class="titulo-atletismo editable-text">Atletismo<span class="edit-tooltip">Click para editar</span></h2>
-            </section>
+deportes: {
+  name: 'Plantilla Deportes',
+  html: `
+    <!-- Navigation (NO EDITABLE) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
+            </div>
+            <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-            <section class="bloque bloque-verde">
-              <img class="imagen-verde editable-image" src="https://placehold.co/688x688" alt="Deporte" />
-              <p class="texto-deporte editable-text">
-                En la Scuola vivimos la actividad física y el deporte no solo como una asignatura, sino además como parte de la formación integral de nuestros estudiantes, basados en la disciplina, la perseverancia, manejo de la frustración, el disfrute del juego y el autocontrol personal. Buscamos así una mejor calidad de vida física y mental.
-                <span class="edit-tooltip">Click para editar</span>
-              </p>
-              <p class="texto-handball editable-text">Uno de estos deportes es el handball ...<span class="edit-tooltip">Click para editar</span></p>
-              <img class="icono-final editable-image" src="https://placehold.co/114x150" alt="Icono final" />
-            </section>
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="hero-overlay"></div>
+            <span class="edit-tooltip">Click para cambiar fondo</span>
+        </div>
+        <div class="hero-content">
+            <div class="hero-breadcrumb">
+                <span>Deportes</span>
+                <i class="fas fa-chevron-right"></i>
+                <span class="current editable-text">Fútbol<span class="edit-tooltip">Click para editar</span></span>
+            </div>
+            <h1 class="hero-title editable-text">Fútbol<span class="edit-tooltip">Click para editar</span></h1>
+            <p class="hero-subtitle editable-text">Desarrollando talento y pasión por el deporte más popular del mundo<span class="edit-tooltip">Click para editar</span></p>
+        </div>
+    </section>
 
-            <div class="etiqueta rojo editable-text">Scuola Paradiso Ecologico<span class="edit-tooltip">Click para editar</span></div>
-            <div class="etiqueta gris centro editable-text">Heliopolis<span class="edit-tooltip">Click para editar</span></div>
-            <div class="etiqueta gris izquierda editable-text">Arccimboldo<span class="edit-tooltip">Click para editar</span></div>
-          </div>`,
-        css: `
-          .pagina { width: 1371px; min-height: 4463px; background: white; position: relative; overflow: hidden; }
-          .fondo-principal { width: 1440px; height: 1319px; position: absolute; top: -16px; left: 0; }
-          .seccion-azul { width: 1471px; height: 2958px; position: absolute; top: 825px; left: -50px; background: #1B2F6F; border-radius: 22px; }
-          .overlay { width: 1440px; height: 200px; position: absolute; top: -16px; left: 0; background: #0A2452; opacity: 0.5; }
-          .logo { width: 301px; height: 106px; position: absolute; top: 31px; left: 47px; }
-          .icono { width: 75px; height: 75px; position: absolute; top: 46px; left: 1248px; }
-          .bloque-rojo .rectangulo-rojo { width: 843px; height: 632px; background: #DC343C; border-radius: 20px; position: absolute; top: 1478px; left: 362px; }
-          .imagen-roja { width: 1024px; height: 712px; border-radius: 15px; position: absolute; top: 1535px; left: 373px; }
-          .titulo-atletismo { position: absolute; top: 2296px; left: 373px; font-size: 90px; font-family: "Merriweather Sans", sans-serif; font-weight: 400; color: white; text-align: right; }
-          .bloque-verde { position: absolute; top: 2592px; left: 186px; width: 1099px; height: 1330px; background: #049B4C; border-radius: 15px; }
-          .imagen-verde { width: 688px; height: 688px; border-radius: 20px; position: absolute; top: -113px; left: 474px; }
-          .texto-deporte { position: absolute; top: 75px; left: 37px; width: 367px; font-size: 40px; font-family: "Merriweather Sans", sans-serif; font-weight: 400; color: white; }
-          .texto-handball { position: absolute; top: 603px; left: 373px; font-size: 40px; font-family: "Merriweather Sans", sans-serif; font-weight: 400; color: white; }
-          .icono-final { width: 114px; height: 150px; position: absolute; top: 1116px; left: 985px; }
-          .etiqueta { position: absolute; top: 1347px; font-size: 15px; font-family: "Crimson Pro", serif; font-weight: 900; line-height: 16px; text-align: center; }
-          .etiqueta.rojo { color: #DC343C; left: 1145px; width: 140px; }
-          .etiqueta.gris { color: #716E6E; }
-          .etiqueta.centro { left: 651px; width: 264px; }
-          .etiqueta.izquierda { left: 106px; width: 315px; }
-        `
-      },
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sport Introduction -->
+        <section class="sport-intro">
+            <div class="container">
+                <div class="intro-grid">
+                    <div class="intro-text">
+                        <div class="section-tag">
+                            <span class="editable-text">DEPORTE DESTACADO<span class="edit-tooltip">Click para editar</span></span>
+                        </div>
+                        <h2 class="editable-text">Excelencia en cada jugada<span class="edit-tooltip">Click para editar</span></h2>
+                        <p class="intro-description editable-text">En la Scuola Italiana fomentamos el desarrollo integral a través del deporte. Nuestro programa de fútbol combina técnica, estrategia y valores para formar no solo buenos jugadores, sino mejores personas.<span class="edit-tooltip">Click para editar</span></p>
+                    </div>
+                    <div class="intro-visual">
+                        <div class="visual-card">
+                            <img class="editable-image" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Fútbol en acción">
+                            <span class="edit-tooltip">Click para cambiar imagen</span>
+                            <div class="visual-overlay">
+                                <i class="fas fa-running"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title editable-text">Nuestro enfoque deportivo<span class="edit-tooltip">Click para editar</span></h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="editable-text">Excelencia deportiva<span class="edit-tooltip">Click para editar</span></h3>
+                        <p class="editable-text">Fomentamos la búsqueda constante de la mejora personal y el logro de metas deportivas.<span class="edit-tooltip">Click para editar</span></p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="editable-text">Trabajo en equipo<span class="edit-tooltip">Click para editar</span></h3>
+                        <p class="editable-text">Desarrollamos habilidades sociales y de colaboración a través del deporte grupal.<span class="edit-tooltip">Click para editar</span></p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="editable-text">Bienestar integral<span class="edit-tooltip">Click para editar</span></h3>
+                        <p class="editable-text">Promovemos una mejor calidad de vida física y mental en nuestros estudiantes.<span class="edit-tooltip">Click para editar</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery">
+            <div class="container">
+                <h2 class="section-title editable-text">Momentos destacados<span class="edit-tooltip">Click para editar</span></h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item large">
+                        <img class="editable-image" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fútbol 1">
+                        <span class="edit-tooltip">Click para cambiar imagen</span>
+                        <div class="gallery-overlay">
+                            <h4 class="editable-text">Campeonato Intercolegial<span class="edit-tooltip">Click para editar</span></h4>
+                            <p class="editable-text">Nuestros estudiantes demostraron su talento y dedicación<span class="edit-tooltip">Click para editar</span></p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="editable-image" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fútbol 2">
+                        <span class="edit-tooltip">Click para cambiar imagen</span>
+                        <div class="gallery-overlay">
+                            <h4 class="editable-text">Entrenamiento diario<span class="edit-tooltip">Click para editar</span></h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="editable-image" src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fútbol 3">
+                        <span class="edit-tooltip">Click para cambiar imagen</span>
+                        <div class="gallery-overlay">
+                            <h4 class="editable-text">Trabajo en equipo<span class="edit-tooltip">Click para editar</span></h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="editable-image" src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fútbol 4">
+                        <span class="edit-tooltip">Click para cambiar imagen</span>
+                        <div class="gallery-overlay">
+                            <h4 class="editable-text">Celebrando victorias<span class="edit-tooltip">Click para editar</span></h4>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img class="editable-image" src="https://images.unsplash.com/photo-1594736797933-d0dda7477660?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fútbol 5">
+                        <span class="edit-tooltip">Click para cambiar imagen</span>
+                        <div class="gallery-overlay">
+                            <h4 class="editable-text">Formación deportiva<span class="edit-tooltip">Click para editar</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+  `,
+  css: `
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Navigation (NO EDITABLE) */
+    .navbar {
+    position: relative; /* CAMBIO: de fixed a relative */
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 36, 82, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .nav-logo img {
+        height: 50px;
+        width: auto;
+    }
+
+    .nav-menu-button {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-menu-button span {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 3px 0;
+        transition: 0.3s;
+        border-radius: 2px;
+    }
+
+    .nav-menu-button:hover span {
+        background-color: #F39C12;
+    }
+
+    /* Hero Section */
+    .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .hero-background-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent; /* Sin overlay, o usa rgba(0, 0, 0, 0.1) para un overlay muy sutil */
+    z-index: 2;
+}
+
+    .hero-content {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        color: white;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-breadcrumb {
+        font-size: 14px;
+        margin-bottom: 20px;
+        opacity: 0.9;
+    }
+
+    .hero-breadcrumb .current {
+        color: #F39C12;
+        font-weight: 600;
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-family: 'Merriweather', serif;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        opacity: 0.9;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    /* Main Content */
+    .main-content {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Sport Introduction */
+    .sport-intro {
+        padding: 100px 0;
+        background: white;
+    }
+
+    .intro-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+    }
+
+    .section-tag {
+        display: inline-block;
+        background: linear-gradient(135deg, #3B69BA, #DC343C);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    .intro-text h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3B69BA;
+        margin-bottom: 30px;
+        font-family: 'Merriweather', serif;
+        line-height: 1.2;
+    }
+
+    .intro-description {
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 40px;
+        line-height: 1.8;
+    }
+
+    .visual-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .visual-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .visual-card img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .visual-overlay {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: rgba(243, 156, 18, 0.9);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .visual-overlay i {
+        color: white;
+        font-size: 24px;
+    }
+
+    /* Features Section */
+    .features {
+        padding: 100px 0;
+        background: #f8f9fa;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3B69BA;
+        margin-bottom: 60px;
+        font-family: 'Merriweather', serif;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border-top: 4px solid transparent;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        border-top-color: #F39C12;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #3B69BA, #DC343C);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        transition: all 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+        transform: scale(1.1);
+    }
+
+    .feature-icon i {
+        color: white;
+        font-size: 32px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #3B69BA;
+        margin-bottom: 15px;
+    }
+
+    .feature-card p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* Gallery Section */
+    .gallery {
+        padding: 100px 0;
+        background: white;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .gallery-item {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item.large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.02);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item.large img {
+        height: 520px;
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0,0,0,0.8));
+        color: white;
+        padding: 30px 20px 20px;
+        transform: translateY(100%);
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+    }
+
+    .gallery-overlay h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .intro-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .gallery-item.large {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .gallery-item.large img {
+            height: 250px;
+        }
+    }
+
+    /* Estilos de edición */
+    .editable-text {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .editable-text:hover {
+        background: rgba(52, 152, 219, 0.1);
+        outline: 2px dashed #3498db;
+        outline-offset: 2px;
+    }
+
+    .editable-text.editing {
+        background: rgba(52, 152, 219, 0.1);
+        outline: 2px solid #3498db;
+    }
+
+    .editable-image {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .editable-image:hover {
+        opacity: 0.8;
+        outline: 3px dashed #3498db;
+        outline-offset: 2px;
+    }
+
+    .hero-background-container:hover {
+        opacity: 0.9;
+        outline: 3px dashed #F39C12;
+        outline-offset: -5px;
+    }
+
+
+    .edit-tooltip {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #2c3e50;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        z-index: 1000;
+    }
+
+    .editable-text:hover .edit-tooltip,
+    .editable-image:hover .edit-tooltip {
+        opacity: 1;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+        /* Deshabilitar selección de texto para visitantes */
+* {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+}
+
+input, textarea {
+    user-select: text !important;
+}
+
+/* Asegurar que los enlaces sigan siendo funcionales */
+a {
+    cursor: pointer;
+}
+  `
+
+},
       intercambio: {
         name: 'Plantilla Intercambio',
         html: `
@@ -743,7 +1313,6 @@ function openInSite(pageId, admin = false) {
             </div>
 
             <img class="small-icon editable-image" src="https://placehold.co/114x150" alt="Icono pequeño" />
-            <img class="large-bg editable-image" src="https://placehold.co/1669x1264" alt="Imagen secundaria" />
 
             <a href="#" class="btn-photos">
                 <span class="btn-photos-text editable-text">Fotos<span class="edit-tooltip">Click para editar</span></span>
@@ -768,7 +1337,6 @@ function openInSite(pageId, admin = false) {
           .main-photo { width: 828px; height: 600px; position: absolute; left: 553px; top: 3119px; border-radius: 20px; }
           .description { width: 494px; position: absolute; left: 26px; top: 2942px; font-size: 40px; font-family: "Merriweather Sans", sans-serif; font-weight: 400; color: black; text-align: right; }
           .small-icon { width: 114px; height: 150px; position: absolute; left: 1263px; top: 3934px; }
-          .large-bg { width: 1669px; height: 1264px; position: absolute; left: -48px; top: 1578px; }
           .btn-photos-text { position: absolute; left: 710px; top: 3868px; font-size: 48px; font-family: "Hermeneus One", sans-serif; font-weight: 400; color: white; }
           .btn-photos { width: 259px; height: 80px; position: absolute; left: 631px; top: 3865px; background: #DC343C; border-radius: 40px; }
           .footer-img { width: 1440px; height: 408px; position: absolute; left: 0; top: 4243px; }
@@ -836,7 +1404,6 @@ function openInSite(pageId, admin = false) {
             <img class="gallery-img img5 editable-image" src="https://placehold.co/600x600" alt="Foto 5">
             <img class="gallery-img img6 editable-image" src="https://placehold.co/600x600" alt="Foto 6">
 
-            <img class="large-bg editable-image" src="https://placehold.co/1669x1264" alt="Decoración fondo">
             <img class="btn-more editable-image" src="https://placehold.co/404x68" alt="Ver más imágenes">
             <img class="footer-img editable-image" src="https://placehold.co/1440x408" alt="Pie de página">
           </div>`,
@@ -855,7 +1422,6 @@ function openInSite(pageId, admin = false) {
           .img4 { left: 736px; top: 2222px; }
           .img5 { left: 78px; top: 2884px; }
           .img6 { left: 720px; top: 2884px; }
-          .large-bg { width: 1669px; height: 1264px; position: absolute; left: 0; top: 449px; }
           .btn-more { width: 404px; height: 68px; position: absolute; left: 146px; top: 3821px; }
           .footer-img { width: 1440px; height: 408px; position: absolute; left: 0; top: 4058px; }
         `
@@ -915,8 +1481,12 @@ function openInSite(pageId, admin = false) {
     }
 
     function loadTemplateEditor(templateId) {
-      const template = templates[templateId];
-      if (!template) return;
+  const template = templates[templateId];
+  if (!template) {
+    alert('Plantilla no encontrada: ' + templateId);
+    cancelEdit();
+    return;
+  }
 
       // Show editor container
       document.getElementById('template-selection').style.display = 'none';
@@ -933,31 +1503,47 @@ function openInSite(pageId, admin = false) {
       `;
       
       // Setup editable functionality
-      setupEditableElements();
+      // Hacer el fondo del hero editable
+setupEditableElements();
+
+// Hacer el fondo del hero editable
+const heroSection = document.querySelector('.hero');
+if (heroSection) {
+    heroSection.classList.add('editable-background');
+    heroSection.addEventListener('click', function(e) {
+        if (e.target === heroSection || e.target.classList.contains('hero-background-container') || e.target.classList.contains('hero-overlay')) {
+            editHeroBackground();
+        }
+    });
+}
       
       // Add to history
       addToHistory('Plantilla cargada', `Se cargó la ${template.name} para edición`);
     }
 
-    function setupEditableElements() {
-      // Setup text editing
-      const editableTexts = document.querySelectorAll('.editable-text');
-      editableTexts.forEach(element => {
-        element.addEventListener('click', function(e) {
-          e.preventDefault();
-          editText(this);
-        });
-      });
-
-      // Setup image editing
-      const editableImages = document.querySelectorAll('.editable-image');
-      editableImages.forEach(element => {
-        element.addEventListener('click', function(e) {
-          e.preventDefault();
-          editImage(this);
-        });
-      });
+    // Agregar después de la función setupEditableElements()
+// Agregar después de la función setupEditableElements()
+function editHeroBackground() {
+  // Buscar el elemento hero section
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    currentEditingImage = heroSection; // Reutilizar la variable existente
+    
+    // Obtener la URL actual del background-image
+    const currentBg = heroSection.style.backgroundImage;
+    let currentUrl = '';
+    if (currentBg) {
+      // Extraer URL del formato url("...")
+      const match = currentBg.match(/url\("(.+)"\)/);
+      if (match) currentUrl = match[1];
     }
+    
+    document.getElementById('imageUrl').value = currentUrl;
+    document.getElementById('imageModal').style.display = 'block';
+  }
+}
+
+// Modificar la función updateImage() existente para manejar background images
 
     function editText(element) {
       // Remove tooltip
@@ -1002,8 +1588,6 @@ function openInSite(pageId, admin = false) {
         
         addToHistory('Texto editado', `Se modificó el contenido de texto`);
       };
-      
-      // Handle cancel
       const cancelEdit = () => {
         element.innerHTML = originalContent;
         element.classList.remove('editing');
@@ -1019,21 +1603,60 @@ function openInSite(pageId, admin = false) {
         }
       });
     }
-
+    function setupEditableElements() {
+    // Setup text editing
+    const editableTexts = document.querySelectorAll('.editable-text');
+    editableTexts.forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            editText(this);
+        });
+    });
     function editImage(element) {
-      currentEditingImage = element;
-      document.getElementById('imageUrl').value = element.src;
-      document.getElementById('imageModal').style.display = 'block';
-    }
+    currentEditingImage = element;
+    document.getElementById('imageUrl').value = element.src;
+    document.getElementById('imageModal').style.display = 'block';
+}
 
-    function updateImage() {
-      const newUrl = document.getElementById('imageUrl').value;
-      if (currentEditingImage && newUrl) {
-        currentEditingImage.src = newUrl;
+    // Setup image editing
+    const editableImages = document.querySelectorAll('.editable-image');
+    editableImages.forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            editImage(this);
+        });
+    });
+}
+function updateImage() {
+    const newUrl = document.getElementById('imageUrl').value;
+    if (currentEditingImage && newUrl) {
+        if (currentEditingImage.classList.contains('hero')) {
+            currentEditingImage.style.backgroundImage = `url("${newUrl}")`;
+        } else {
+            currentEditingImage.src = newUrl;
+        }
         closeImageModal();
         addToHistory('Imagen actualizada', `Se cambió una imagen por: ${newUrl.substring(0, 50)}...`);
-      }
     }
+}
+
+   function editHeroBackground() {
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        currentEditingImage = heroSection;
+        
+        // Obtener la URL actual del background
+        const currentBg = heroSection.style.backgroundImage;
+        let currentUrl = '';
+        if (currentBg) {
+            const match = currentBg.match(/url\(["']?(.+?)["']?\)/);
+            if (match) currentUrl = match[1];
+        }
+        
+        document.getElementById('imageUrl').value = currentUrl;
+        document.getElementById('imageModal').style.display = 'block';
+    }
+}
 
     function closeImageModal() {
       document.getElementById('imageModal').style.display = 'none';
@@ -1170,12 +1793,12 @@ function openInSite(pageId, admin = false) {
               Última modificación: ${page.lastModified}
             </div>
           </div>
-          <div class="template-actions">
-        <button class="btn btn-secondary btn-small" onclick="openInSite(${page.id}, true)">🔗 Abrir en sitio</button>
-  ${
-    modoActual === "eliminar"
-      ? `<button class="btn btn-danger btn-small" onclick="confirmDeletePage(${page.id}, '${page.name}')">Eliminar</button>`
-      : "" 
+         <div class="template-actions">
+  <div class="template-actions">
+  <button class="btn btn-secondary btn-small" onclick="openInSite(${page.id})">🔗 Abrir en sitio</button>
+  ${modoActual === "editar" 
+    ? `<button class="btn btn-primary btn-small" onclick="editPage(${page.id})">Editar en gestor</button>`
+    : `<button class="btn btn-danger btn-small" onclick="confirmDeletePage(${page.id}, '${page.name}')">Eliminar</button>`
   }
 </div>
 
@@ -1196,28 +1819,23 @@ function openInSite(pageId, admin = false) {
     function editPage(pageId) {
   const page = savedPages.find(p => p.id === pageId);
   if (!page) return;
-  editingPageId = pageId;
-
+  
+  editingPageId = pageId; // Esto debe estar aquí
+  
   // Cambiar a sección "Agregar"
   showSection('agregar');
   
   // Marcar plantilla actual
   currentTemplate = page.template;
-  document.querySelector(`[data-template="${page.template}"]`).classList.add('selected');
+  const templateCard = document.querySelector(`[data-template="${page.template}"]`);
+  if (templateCard) {
+    templateCard.classList.add('selected');
+  } else {
+    console.error('Plantilla no encontrada:', page.template);
+    return;
+  }
   
-  // Mostrar editor
-  document.getElementById('template-selection').style.display = 'none';
-  document.getElementById('editor-container').style.display = 'block';
-  document.getElementById('current-template-name').textContent = page.name + ' (Editando)';
-  
-  // ✅ Cargar contenido con estilos
-  const frame = document.getElementById('template-frame');
-  frame.innerHTML = page.content;
-  
-  // ✅ Reaplicar edición
-  setupEditableElements();
-  
-  addToHistory('Página editada', `Se abrió para edición: ${page.name}`);
+  // Resto del código...
 }
 
 
@@ -1271,6 +1889,9 @@ function openInSite(pageId, admin = false) {
     if (document.getElementById('pages-list')) loadPagesList();
   }
 });
+function goToIndexDirectly() {
+  window.open('index.html?cms_admin_token=true', '_blank');
+}
 
   </script>
 </body>

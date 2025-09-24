@@ -1,0 +1,81 @@
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
+        </div>
+        <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+<style>
+
+    /* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 36, 82, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-logo img {
+    height: 50px;
+    width: auto;
+}
+
+.nav-menu-button {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu-button span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.nav-menu-button:hover span {
+    background-color: #F39C12;
+}
+</style>
+<script>
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scrolling down y ya bajó más de 100px
+        navbar.style.transform = 'translateY(-100%)';
+        navbar.style.opacity = '0';
+    } else {
+        // Scrolling up o está en el top
+        navbar.style.transform = 'translateY(0)';
+        navbar.style.opacity = '1';
+    }
+    
+    lastScrollTop = scrollTop;
+});
+</script>

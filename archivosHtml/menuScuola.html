@@ -15,12 +15,23 @@
     }
 
     body {
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-      background-color: white;
-    }
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  transform: translateX(100%);
+  animation: slideInFromRight 0.5s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 
     /* Lado izquierdo con imagen */
     .left {
@@ -202,6 +213,14 @@
       from { opacity: 0; transform: translateX(10px); }
       to { opacity: 1; transform: translateX(0); }
     }
+    @keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
 
   </style>
 </head>
@@ -285,6 +304,18 @@
       newWin.document.write(page.content);
       newWin.document.close();
     }
+    // Cerrar con transición
+// Cerrar con transición
+document.querySelector('.close-button').addEventListener('click', () => {
+  document.body.style.animation = 'slideOutToRight 0.5s ease-in forwards';
+  setTimeout(() => {
+    if (document.referrer) {
+      history.back(); // Si hay página anterior, vuelve
+    } else {
+      window.location.href = 'index.html'; // Si no, va al inicio
+    }
+  }, 500);
+});
 
     document.addEventListener("DOMContentLoaded", () => {
       updateMenu();
@@ -320,5 +351,6 @@
       });
     });
   </script>
+  <script src="cms-admin.js"></script>
 </body>
 </html>

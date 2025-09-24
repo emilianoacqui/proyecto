@@ -236,14 +236,19 @@
       overflow: hidden;
     }
 
-    .editor-header {
-      background: #34495e;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: between;
-      align-items: center;
-    }
+    /* Editor Header Flotante */
+.editor-header {
+    background: #34495e;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
     .editor-title {
       font-size: 18px;
@@ -533,25 +538,27 @@
       </div>
 
       <!-- Editor Container -->
-      <div id="editor-container" class="editor-container">
-        <div class="editor-header">
-          <div class="editor-title">Editando: <span id="current-template-name"></span></div>
-          <div class="editor-actions">
+      <!-- Editor Container -->
+<div id="editor-container" class="editor-container">
+    <div class="editor-header">
+        <div class="editor-title">Editando: <span id="current-template-name"></span></div>
+        <div class="editor-actions">
             <button class="btn btn-secondary" onclick="cancelEdit()">Cancelar</button>
             <button class="btn btn-success" onclick="savePage()">Agregar Página</button>
-          </div>
         </div>
-        <div class="page-name-section" style="padding: 15px 20px; background: #f8f9fa; border-bottom: 1px solid #ddd;">
-  <label for="page-name-input" style="display: block; margin-bottom: 5px; font-weight: 600;">Nombre de la página:</label>
-  <input type="text" id="page-name-input" placeholder="Ej: Mi página sobre..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-</div>
-        
-        <div class="template-container">
-          <div id="template-frame" class="template-frame">
+    </div>
+    
+    <div class="page-name-section" style="padding: 15px 20px; background: #f8f9fa; border-bottom: 1px solid #ddd;">
+        <label for="page-name-input" style="display: block; margin-bottom: 5px; font-weight: 600;">Nombre de la página:</label>
+        <input type="text" id="page-name-input" placeholder="Ej: Mi página sobre..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+    </div>
+    
+    <div class="template-container">
+        <div id="template-frame" class="template-frame">
             <!-- Template content will be loaded here -->
-          </div>
         </div>
-      </div>
+    </div>
+</div>
     </section>
     <!-- Other Sections -->
     <section id="editar" class="content-area" style="display: none;">
@@ -690,7 +697,7 @@
           <nav class="navbar">
               <div class="nav-container">
                   <div class="nav-logo">
-                      <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 120px;">
+                      <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
                   </div>
                   <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
                       <span></span>
@@ -1196,7 +1203,7 @@
           <nav class="navbar">
               <div class="nav-container">
                   <div class="nav-logo">
-                      <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 120px;">
+                      <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
                   </div>
                   <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
                       <span></span>
@@ -1264,8 +1271,8 @@
           body { font-family: 'Merriweather Sans', sans-serif; line-height: 1.6; color: #333; }
           .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
  
-          .navbar { position: relative; background: rgba(10, 36, 82, 0.5); z-index: 1000; height: 80px; }
-          .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto;  height: 100%; }
+          .navbar { position: relative; background: rgba(10, 36, 82, 0.5); z-index: 1000; }
+          .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto; }
           .nav-logo img { height: 50px; width: auto; }
           .nav-menu-button { display: flex; flex-direction: column; cursor: pointer; padding: 8px; }
           .nav-menu-button span { width: 25px; height: 3px; background: white; margin: 3px 0; border-radius: 2px; }
@@ -1323,7 +1330,7 @@
           <nav class="navbar">
               <div class="nav-container">
                   <div class="nav-logo">
-                      <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 120px;">
+                      <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
                   </div>
                   <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
                       <span></span>
@@ -1427,8 +1434,8 @@
     padding-left: 5%; 
     margin-bottom: -80px;
 }
-          .navbar { position: relative; background: rgba(10, 36, 82, 0.5); z-index: 1000; height: 80px; }
-          .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto;  height: 100%; }
+          .navbar { position: relative; background: rgba(10, 36, 82, 0.5); z-index: 1000; }
+          .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(220, 52, 60, 0.4); }
           .hero-content-left { position: relative; color: white; z-index: 2; max-width: 600px; }
           .hero-title-left { font-size: 3rem; font-weight: 700; margin-bottom: 15px; }
           .hero-subtitle-left { font-size: 1.2rem; opacity: 0.95; }
@@ -1473,7 +1480,7 @@
           <nav class="navbar">
               <div class="nav-container">
                   <div class="nav-logo">
-                      <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 120px;">
+                      <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
                   </div>
                   <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
                       <span></span>
@@ -1565,8 +1572,8 @@
           body { font-family: 'Merriweather Sans', sans-serif; line-height: 1.6; color: #333; }
           .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
           
-          .navbar { position: relative; background: rgba(10, 36, 82, 0.5); z-index: 1000; height: 80px; }
-          .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto;  height: 100%; }
+          .navbar { position: relative; background: rgba(10, 36, 82, 0.5); z-index: 1000; }
+          .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; max-width: 1200px; margin: 0 auto; }
           .nav-logo img { height: 50px; width: auto; }
           .nav-menu-button { display: flex; flex-direction: column; cursor: pointer; padding: 8px; }
           .nav-menu-button span { width: 25px; height: 3px; background: white; margin: 3px 0; border-radius: 2px; }
@@ -1656,7 +1663,7 @@
     <div class="footer-container">
         <div class="footer-left">
             <div class="footer-logo">
-                <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 120px;">
+                <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo" style="height: 60px;">
             </div>
             <div class="footer-subtitle">
                 <p>AMC Scuola Italiana di Montevideo</p>
@@ -1683,7 +1690,7 @@
     </div>
     
     <div class="footer-info-bar">
-        <p>Desarrollado por el equipo SGE | Proyecto de apoyo 2002 - EE Informática</p>
+        <p>Desarrollado por el equipo KORE | Proyecto de graduacion - Bachillerato tecnologio 2025</p>
     </div>
 </footer>`;
 
