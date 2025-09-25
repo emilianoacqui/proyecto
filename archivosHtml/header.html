@@ -2,7 +2,7 @@
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
+            <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo">
         </div>
         <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
             <span></span>
@@ -11,14 +11,15 @@
         </div>
     </div>
 </nav>
-<style>
 
-    /* Navigation */
+<style>
+/* Navigation */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    height: 80px; /* altura fija del header */
     background: rgba(10, 36, 82, 0.5);
     z-index: 1000;
     transition: all 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
@@ -28,14 +29,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
+    padding: 0 5%; /* sin padding vertical para no alterar la altura */
     max-width: 1200px;
     margin: 0 auto;
+    height: 100%; /* ocupa todo el alto de la navbar */
+}
+
+.nav-logo {
+    position: relative;
+    height: 100%;
+    overflow: visible; /* deja que el logo sobresalga */
 }
 
 .nav-logo img {
-    height: 50px;
+    height: 120px; /* logo grande */
     width: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* centrado vertical */
 }
 
 .nav-menu-button {
@@ -59,6 +70,7 @@
     background-color: #F39C12;
 }
 </style>
+
 <script>
 let lastScrollTop = 0;
 

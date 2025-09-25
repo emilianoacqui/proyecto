@@ -493,21 +493,7 @@ body.loading-cms-content .footer-bottom {
             object-fit: cover;
         }
 
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(220, 52, 60, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+        
 
         .play-button:hover {
             background: rgba(220, 52, 60, 1);
@@ -528,7 +514,7 @@ body.loading-cms-content .footer-bottom {
         .italian-quote p {
             font-size: 16px;
             font-style: italic;
-            color: #666;
+            color: #ffffff;
             line-height: 1.6;
             margin: 0;
         }
@@ -1501,7 +1487,7 @@ function startNewsObserver() {
 <nav class="navbar">
     <div class="nav-container">
         <div class="nav-logo">
-            <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo">
+            <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 120px;">
         </div>
         <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
             <span></span>
@@ -1515,7 +1501,7 @@ function startNewsObserver() {
 <header class="header">
     <div class="hero-content">
         <h1 class="hero-title">Una nueva visión de la educación.<br> La Scuola aperta al mondo</h1>
-        <a href="#" class="admissions-btn">Admisiones</a>
+        <a href="popap.html" class="admissions-btn">Admisiones</a>
     </div>
 </header>
 
@@ -1525,21 +1511,21 @@ function startNewsObserver() {
                     <div class="level-content">
                         <h2 class="level-title">Inicial</h2>
                         <p class="level-age">3 meses a 5 años</p>
-                        <a href="#" class="level-btn btn-green">Ver mas</a>
+                        <a href="menuInicial.html" class="level-btn btn-green">Ver mas</a>
                     </div>
                 </div>
                 <div class="level-card primaria">
                     <div class="level-content">
                         <h2 class="level-title">Primaria</h2>
                         <p class="level-age">6 a 12 años</p>
-                        <a href="#" class="level-btn btn-gray">Ver Mas</a>
+                        <a href="Primaria.html" class="level-btn btn-gray">Ver Mas</a>
                     </div>
                 </div>
                 <div class="level-card secundaria">
                     <div class="level-content">
                         <h2 class="level-title">Secundaria</h2>
                         <p class="level-age">12 a 18 años</p>
-                        <a href="#" class="level-btn btn-red">Ver mas</a>
+                        <a href="menuSecundaria.html" class="level-btn btn-red">Ver mas</a>
                     </div>
                 </div>
             </section>
@@ -1560,7 +1546,7 @@ function startNewsObserver() {
                 <div class="about-content">
                     <h2 class="section-title-small">SOBRE NOSOTROS</h2>
                     <p class="about-text">La Scuola Italiana di Montevideo desarrolla un programa educativo nacional e internacional que abre las puertas a un mundo plurilingüe y multicultural.</p>
-                    <a href="#" class="read-more-btn">Leer Mas -></a>
+                    <a href="verMas.html" class="read-more-btn">Leer Mas -></a>
                 </div>
             </section>
 
@@ -1574,7 +1560,7 @@ function startNewsObserver() {
             <!-- Columna izquierda -->
             <div class="quality-column left">
                 <div class="quality-item-new">
-                    <a href="#">
+                    <a href="CursosIdioma.html">
                         <div class="quality-icon-new">
                             <i class="fas fa-paint-brush"></i>
                         </div>
@@ -1584,17 +1570,17 @@ function startNewsObserver() {
                 </div>
                 
                 <div class="quality-item-new">
-                    <a href="#">
+                    <a href="Voluntariado.html">
                         <div class="quality-icon-new">
                             <i class="fas fa-hands-helping"></i>
                         </div>
-                        <p class="quality-text-new">Liderazgo, voluntariado,<br>ciudadanía activa</p>
+                        <p class="quality-text-new">voluntariado</p>
                         <div class="arrow">→</div>
                     </a>
                 </div>
                 
                 <div class="quality-item-new">
-                    <a href="#">
+                    <a href="idiomas.html">
                         <div class="quality-icon-new">
                             <i class="fas fa-language"></i>
                         </div>
@@ -1604,7 +1590,7 @@ function startNewsObserver() {
                 </div>
                 
                 <div class="quality-item-new">
-                    <a href="#">
+                    <a href="PropuestaEcologica.html">
                         <div class="quality-icon-new">
                             <i class="fas fa-leaf"></i>
                         </div>
@@ -1617,7 +1603,9 @@ function startNewsObserver() {
             <!-- Centro - Video -->
             <div class="center-video">
                 <div class="video-container">
-                    <img src="fotosPrincipales/scuola.mp4" alt="Video del colegio" class="video-thumbnail">
+                    <video class="video-thumbnail" controls poster="fotosPrincipales/thumbnail.jpg">
+       <source src="fotosPrincipales/scuola.mp4" type="video/mp4">
+   </video>
                     <div class="play-button">
                         <i class="fas fa-play"></i>
                     </div>
@@ -1631,7 +1619,7 @@ function startNewsObserver() {
             <!-- Columna derecha -->
             <div class="quality-column right">
                 <div class="quality-item-new">
-                    <a href="#">
+                    <a href="convivencia.html">
                         <div class="quality-icon-new">
                             <i class="fas fa-users"></i>
                         </div>
@@ -1651,7 +1639,7 @@ function startNewsObserver() {
                 </div>
                 
                 <div class="quality-item-new">
-                    <a href="#">
+                    <a href="Arte.html">
                         <div class="quality-icon-new">
                             <i class="fas fa-atom"></i>
                         </div>
@@ -1683,10 +1671,10 @@ function startNewsObserver() {
                         <div class="project-content">
                             <h3 class="project-title">Arcimboldo</h3>
                             <p class="project-description">Se trata de una propuesta multidisciplinaria dirigida a estudiantes de 6o año de Ciencias Biológicas y Social-Económico, integrando contenidos de italiano, matemática, literatura, biología y química.</p>
-                            <a href="#" class="project-btn">Boton</a>
+                            <a href="arcimboldo.html" class="project-btn">Ver mas</a>
                         </div>
                         <div class="project-image">
-                            <img src="https://placehold.co/516x344" alt="Arcimboldo">
+                            <img src="fotosPrincipales/archimboldo.jpg" alt="Arcimboldo">
                         </div>
                     </div>
                     
@@ -1694,10 +1682,10 @@ function startNewsObserver() {
                         <div class="project-content">
                             <h3 class="project-title">Heliopolis</h3>
                             <p class="project-description">En el marco del proyecto "Heliópolis" cuyo objetivo es investigar sobre la figura de Francisco Piria y sus conexiones con la alquimia y el estudio de la astronomía los alumnos visitan la ciudad de Piriápolis.</p>
-                            <a href="#" class="project-btn">Ver Mas</a>
+                            <a href="heliopolis.html" class="project-btn">Ver Mas</a>
                         </div>
                         <div class="project-image">
-                            <img src="https://placehold.co/487x344" alt="Heliopolis">
+                            <img src="fotosPrincipales/heliopolis.jpg" alt="Heliopolis">
                         </div>
                     </div>
                     
@@ -1705,10 +1693,10 @@ function startNewsObserver() {
                         <div class="project-content">
                             <h3 class="project-title">Scuola paradiso ecologico</h3>
                             <p class="project-description">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                            <a href="#" class="project-btn">Boton</a>
+                            <a href="paradiso.html" class="project-btn">Ver mas</a>
                         </div>
                         <div class="project-image">
-                            <img src="https://placehold.co/541x344" alt="Scuola paradiso">
+                            <img src="fotosPrincipales/paradiso.jpg" alt="Scuola paradiso">
                         </div>
                     </div>
                 </div>
@@ -1727,7 +1715,7 @@ function startNewsObserver() {
             <img src="https://placehold.co/317x238" alt="Noticia 1">
             <div class="news-card-content">
                 <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                <a href="#" class="news-card-btn">Boton</a>
+                <a href="noticiaDestacada1.html" class="news-card-btn">Boton</a>
             </div>
         </div>
         
@@ -1794,7 +1782,7 @@ function startNewsObserver() {
     <div class="footer-container">
         <div class="footer-left">
             <div class="footer-logo">
-                <img src="fotos/logo.png" alt="Scuola Italiana di Montevideo" style="height: 60px;">
+                <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo" style="height: 60px;">
             </div>
             <div class="footer-subtitle">
                 <p>AMC Scuola Italiana di Montevideo</p>
