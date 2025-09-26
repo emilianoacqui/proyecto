@@ -4,12 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scuola Italiana - Campus Interactivo</title>
+
+
+  <!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <img src="fotosPrincipales/logo2.png" alt="Scuola Italiana di Montevideo">
+        </div>
+        <div class="nav-menu-button" onclick="window.location.href='menuScuola.html'">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px; /* altura fija del header */
+    background: rgba(10, 36, 82, 0.5);
+    z-index: 1000;
+    transition: all 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%; /* sin padding vertical para no alterar la altura */
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%; /* ocupa todo el alto de la navbar */
+}
+
+.nav-logo {
+    position: relative;
+    height: 100%;
+    overflow: visible; /* deja que el logo sobresalga */
+}
+
+.nav-logo img {
+    height: 120px; /* logo grande */
+    width: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* centrado vertical */
+}
+
+.nav-menu-button {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu-button span {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.nav-menu-button:hover span {
+    background-color: #F39C12;
+}
+</style>
+
+<script>
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+        // Scrolling down y ya bajó más de 100px
+        navbar.style.transform = 'translateY(-100%)';
+        navbar.style.opacity = '0';
+    } else {
+        // Scrolling up o está en el top
+        navbar.style.transform = 'translateY(0)';
+        navbar.style.opacity = '1';
+    }
+    
+    lastScrollTop = scrollTop;
+});
+</script>
+
   <style>
+
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+    
 
     body {
       font-family: sans-serif;
@@ -482,19 +582,7 @@
       Tu navegador no soporta video HTML5.
     </video>
     
-    <div class="nav-container">
-      <div class="nav-content">
-        <img class="logo" src="fotos/logo2.png" alt="Scuola Italiana Logo" />
-        <div class="nav-menu">
-          <div class="nav-item">INICIO</div>
-          <div class="nav-item">INSTITUCIONAL</div>
-          <div class="nav-item">PROPUESTA EDUCATIVA</div>
-          <div class="nav-item">INSCRIPCIONES</div>
-          <div class="nav-item">PLATAFORMA</div>
-        </div>
-      </div>
-    </div>
-  </div>
+    
 
   <!-- Sección principal -->
   <div class="main-section">
@@ -523,37 +611,37 @@
   <!-- Mapa interactivo -->
   <div class="map-section">
     <div class="mapa-container">
-      <img src="fotos/scuola.jpg" alt="Mapa de la escuela" />
+      <img src="fotosPrincipales/scuola.jpg" alt="Mapa de la escuela" />
 
       <!-- Puntos interactivos responsivos -->
-      <div class="punto" style="top: 12%; left: 40%;" onclick="mostrarInfo('fotos/scuolaclub.jpg', 'Scuola Club ofrece a su comunidad educativa acceso a canchas de tenis, canchas de césped sintético, clases de gimnasia, un Club House para celebraciones y una colonia de vacaciones con actividades guiadas. Los alumnos pueden acceder a 30 becas completas para aprender y practicar tenis.')">+</div>
+      <div class="punto" style="top: 12%; left: 40%;" onclick="mostrarInfo('fotosPrincipales/scuolaclub.jpg', 'Scuola Club ofrece a su comunidad educativa acceso a canchas de tenis, canchas de césped sintético, clases de gimnasia, un Club House para celebraciones y una colonia de vacaciones con actividades guiadas. Los alumnos pueden acceder a 30 becas completas para aprender y practicar tenis.')">+</div>
 
-      <div class="punto" style="top: 26%; left: 50%;" onclick="mostrarInfo('fotos/poli.jpg', 'El colegio cuenta con un polideportivo moderno y funcional, destinado a la realización de actividades deportivas, recreativas y eventos institucionales. El espacio está equipado para la práctica de diversos deportes como voleibol, básquetbol, handball, fútbol y gimnasia.')">+</div>
+      <div class="punto" style="top: 26%; left: 50%;" onclick="mostrarInfo('fotosPrincipales/poli.jpg', 'El colegio cuenta con un polideportivo moderno y funcional, destinado a la realización de actividades deportivas, recreativas y eventos institucionales. El espacio está equipado para la práctica de diversos deportes como voleibol, básquetbol, handball, fútbol y gimnasia.')">+</div>
 
-      <div class="punto" style="top: 40%; left: 20%;" onclick="mostrarInfo('fotos/bachi.jpg', 'Bachillerato del Colegio. El colegio ofrece un bachillerato completo que combina formación académica sólida con el desarrollo personal de los estudiantes, preparándolos tanto para estudios terciarios como para su integración activa en la sociedad.')">+</div>
+      <div class="punto" style="top: 40%; left: 20%;" onclick="mostrarInfo('fotosPrincipales/bachi.jpg', 'Bachillerato del Colegio. El colegio ofrece un bachillerato completo que combina formación académica sólida con el desarrollo personal de los estudiantes, preparándolos tanto para estudios terciarios como para su integración activa en la sociedad.')">+</div>
 
-      <div class="punto" style="top: 30%; left: 20%;" onclick="mostrarInfo('fotos/estacionamiento.jpg', 'Estacionamiento del Colegio. El colegio cuenta con un espacio de estacionamiento disponible para alumnos, funcionarios y familias de la comunidad educativa, con sectores diferenciados para automóviles, motos y bicicletas.')">+</div>
+      <div class="punto" style="top: 30%; left: 20%;" onclick="mostrarInfo('fotosPrincipales/estacionamiento.jpg', 'Estacionamiento del Colegio. El colegio cuenta con un espacio de estacionamiento disponible para alumnos, funcionarios y familias de la comunidad educativa, con sectores diferenciados para automóviles, motos y bicicletas.')">+</div>
 
-      <div class="punto" style="top: 65%; left: 47%;" onclick="mostrarInfo('fotos/BBSIM.jpg', 'La sección inicial del colegio está especialmente diseñada para niños y niñas de hasta 6 años, brindando un entorno seguro, cálido y estimulante donde comienzan sus primeros pasos en el ámbito educativo.')">+</div>
+      <div class="punto" style="top: 65%; left: 47%;" onclick="mostrarInfo('fotosPrincipales/BBSIM.jpg', 'La sección inicial del colegio está especialmente diseñada para niños y niñas de hasta 6 años, brindando un entorno seguro, cálido y estimulante donde comienzan sus primeros pasos en el ámbito educativo.')">+</div>
 
-      <div class="punto" style="top: 43%; left: 46%;" onclick="mostrarInfo('fotos/nuestro-colegio.jpg', 'Scuola italiana di montevideo. La Scuola Italiana es una institución educativa bilingüe que acompaña el recorrido académico y personal de sus estudiantes desde los primeros años hasta el egreso de bachillerato.')">+</div>
+      <div class="punto" style="top: 43%; left: 46%;" onclick="mostrarInfo('fotosPrincipales/nuestro-colegio.jpg', 'Scuola italiana di montevideo. La Scuola Italiana es una institución educativa bilingüe que acompaña el recorrido académico y personal de sus estudiantes desde los primeros años hasta el egreso de bachillerato.')">+</div>
 
-      <div class="punto" style="top: 50%; left: 44%;" onclick="mostrarInfo('fotos/loba.jpg', 'La Loba. Ubicada frente a la entrada principal, la escultura de la Loba Capitolina con Rómulo y Remo simboliza la herencia cultural italiana que identifica a la Scuola.')">+</div>
+      <div class="punto" style="top: 50%; left: 44%;" onclick="mostrarInfo('fotosPrincipales/loba.jpg', 'La Loba. Ubicada frente a la entrada principal, la escultura de la Loba Capitolina con Rómulo y Remo simboliza la herencia cultural italiana que identifica a la Scuola.')">+</div>
 
-      <div class="punto" style="top: 52%; left: 33%;" onclick="mostrarInfo('fotos/scuolacaffe.jpg', 'Scuola Caffè. El Scuola Caffè es un espacio pensado para que los estudiantes puedan permanecer en el colegio fuera del horario de clase, en un ambiente cómodo y tranquilo.')">+</div>
+      <div class="punto" style="top: 52%; left: 33%;" onclick="mostrarInfo('fotosPrincipales/scuolacaffe.jpg', 'Scuola Caffè. El Scuola Caffè es un espacio pensado para que los estudiantes puedan permanecer en el colegio fuera del horario de clase, en un ambiente cómodo y tranquilo.')">+</div>
 
-      <div class="punto" style="top: 52%; left: 27%;" onclick="mostrarInfo('fotos/bici.jpg', 'Sector de bicicletas y motos. El colegio dispone de un espacio específico para que los estudiantes puedan dejar sus bicicletas y motos de forma segura durante el horario escolar.')">+</div>
+      <div class="punto" style="top: 52%; left: 27%;" onclick="mostrarInfo('fotosPrincipales/bici.jpg', 'Sector de bicicletas y motos. El colegio dispone de un espacio específico para que los estudiantes puedan dejar sus bicicletas y motos de forma segura durante el horario escolar.')">+</div>
 
-      <div class="punto" style="top: 20%; left: 77%;" onclick="mostrarInfo('fotos/canchas.jpg', 'Canchas de fútbol. La Scuola Italiana cuenta con dos canchas de fútbol acondicionadas para la práctica deportiva, tanto en el marco de las clases de educación física como en actividades extracurriculares.')">+</div>
+      <div class="punto" style="top: 20%; left: 77%;" onclick="mostrarInfo('fotosPrincipales/canchas.jpg', 'Canchas de fútbol. La Scuola Italiana cuenta con dos canchas de fútbol acondicionadas para la práctica deportiva, tanto en el marco de las clases de educación física como en actividades extracurriculares.')">+</div>
 
-      <div class="punto" style="top: 32%; left: 75%;" onclick="mostrarInfo('fotos/hockey.jpg', 'Canchas de hockey. El colegio dispone de dos canchas de hockey que forman parte del proyecto deportivo institucional, permitiendo el entrenamiento y la competencia.')">+</div>
+      <div class="punto" style="top: 32%; left: 75%;" onclick="mostrarInfo('fotosPrincipales/hockey.jpg', 'Canchas de hockey. El colegio dispone de dos canchas de hockey que forman parte del proyecto deportivo institucional, permitiendo el entrenamiento y la competencia.')">+</div>
     </div>
   </div>
 
   <!-- Sección Prosperar -->
   <div class="prosper-section">
     <div class="divider">
-      <img src="fotos/logo2.png" alt="Logo" />
+      <img src="fotosPrincipales/logo2.png" alt="Logo" />
     </div>
     <h2 class="section-title">Espacio para prosperar</h2>
     <p class="section-description">
@@ -563,12 +651,12 @@
     <!-- Carrusel responsivo -->
     <div class="carousel-container">
       <div class="carousel-track" id="carouselTrack">
-        <img src="fotos/ejemplo1.jpg" alt="Imagen 1">
-        <img src="fotos/ejemplo2.jpg" alt="Imagen 2">
-        <img src="fotos/ejemplo3.jpg" alt="Imagen 3">
-        <img src="fotos/ejemplo4.jpg" alt="Imagen 4">
-        <img src="fotos/ejemplo5.jpg" alt="Imagen 5">
-        <img src="fotos/ejemplo6.jpg" alt="Imagen 6">
+        <img src="fotosPrincipales/convivencia3.jpg" alt="Imagen 1">
+        <img src="fotosPrincipales/CursosExtracurriculares1.jpg" alt="Imagen 2">
+        <img src="fotosPrincipales/CursosExtracurriculares2.jpg" alt="Imagen 3">
+        <img src="fotosPrincipales/ejemplo2.jpg" alt="Imagen 4">
+        <img src="fotosPrincipales/heliopolis2.jpg" alt="Imagen 5">
+        <img src="fotosPrincipales/PrimerDia2.jpg.png" alt="Imagen 6">
       </div>
 
       <button class="carousel-btn left" id="prevBtn" aria-label="Imagen anterior">
