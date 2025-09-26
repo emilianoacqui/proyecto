@@ -600,7 +600,7 @@ body.loading-cms-content .footer-bottom {
 
         /* News Section */
         .news-section {
-    padding: 140px 5% 100px 5%;
+    padding: 140px 5% 180px 5%; /* Cambié de 100px a 180px el padding inferior */
     background: #0A2452;
     position: relative;
     overflow: hidden;
@@ -670,9 +670,11 @@ body.loading-cms-content .footer-bottom {
 
         /* Footer Links */
         .footer-links {
-            background: #1D1A1A;
-            padding: 80px 5%;
-        }
+    background: #1D1A1A;
+    padding: 80px 5%;
+    margin-top: 120px; /* Agregar esta línea */
+    text-decoration: none;
+}
 
         .footer-grid {
             display: grid;
@@ -680,6 +682,7 @@ body.loading-cms-content .footer-bottom {
             gap: 20px;
             max-width: 1400px;
             margin: 0 auto;
+            text-decoration: none;
         }
 
         .footer-card {
@@ -694,6 +697,9 @@ body.loading-cms-content .footer-bottom {
             color: white;
             font-size: 32px;
             font-weight: 400;
+            text-decoration: none;
+            color: inherit;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .footer-card img {
@@ -718,6 +724,7 @@ body.loading-cms-content .footer-bottom {
         .footer-card-content {
             position: relative;
             z-index: 2;
+            color: white;
         }
 
         .footer-card.blue::before { background: #2C4C84; }
@@ -812,7 +819,7 @@ body.loading-cms-content .footer-bottom {
         font-size: 16px;
         color: #0A2452;
         text-indent: 0;
-        display: block;
+        
     }
     .container {
         width: 100%;
@@ -970,6 +977,7 @@ body.loading-cms-content .footer-bottom {
     }
 
 /* Quality section móvil - Layout específico como la imagen */
+/* Quality section móvil - CORREGIDO */
 .quality-section {
     padding: 40px 20px 80px 20px;
     background: white !important;
@@ -987,120 +995,72 @@ body.loading-cms-content .footer-bottom {
     color: #0A2452 !important;
 }
 
+/* Adaptar la estructura existente para móvil */
 .quality-grid-new {
-    display: none;
-}
-
-/* Crear vista móvil alternativa */
-.quality-mobile {
-    display: block;
-    max-width: 320px;
-    margin: 0 auto;
-    position: relative;
-    height: 180px;
-}
-
-.quality-item-mobile {
     display: flex;
-    position: absolute;
     flex-direction: column;
-    align-items: center;
+    gap: 20px;
+    padding: 20px 10px;
+    max-width: 350px;
+    margin: 0 auto;
 }
 
-.quality-item-mobile:nth-child(1) {
-    top: 0;
-    left: 0;
-    width: 80px;
+.quality-column {
+    max-width: 100%;
+    display: grid;
+grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
 }
 
-.quality-item-mobile:nth-child(2) {
-    top: 0;
-    right: 0;
-    width: 80px;
+
+
+.quality-item-new {
+    min-width: auto;
+    max-width: none;
+    padding: 15px;
 }
 
-.quality-item-mobile:nth-child(3) {
-    top: 0;
-    right: 80px;
-    width: 60px;
-}
-
-.quality-item-mobile:nth-child(4) {
-    top: 60px;
-    left: 0;
-    width: 80px;
-}
-
-.quality-item-mobile:nth-child(5) {
-    top: 60px;
-    right: 0;
-    width: 80px;
-}
-
-.quality-item-mobile:nth-child(6) {
-    bottom: 0;
-    left: 0;
-    width: 80px;
-}
-
-.quality-item-mobile:nth-child(7) {
-    bottom: 0;
-    right: 80px;
-    width: 60px;
-}
-
-.quality-item-mobile:nth-child(8) {
-    bottom: 0;
-    right: 0;
-    width: 80px;
-}
-
-.quality-icon-mobile {
-    width: 22px;
-    height: 20px;
-    margin: 0 0 5px 0;
-    background: #DC343C;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.quality-icon-mobile i {
-    width: 17px;
-    height: 15px;
-    font-size: 10px;
-    color: white;
-}
-
-.quality-text-mobile {
-    font-size: 8px;
-    color: black;
-    margin: 0;
-    line-height: 1.1;
+.quality-item-new a {
+    flex-direction: column;
+    gap: 10px;
     text-align: center;
 }
 
-/* Círculo central con imagen del edificio móvil */
-.center-image-mobile {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 111px;
-    height: 72px;
-    border-radius: 3px;
-    background: white;
-    border: 1px solid #ddd;
-    overflow: hidden;
-    z-index: 2;
+.quality-icon-new {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
 }
 
-.center-image-mobile img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.quality-icon-new i {
+    font-size: 14px;
+}
+
+.quality-text-new {
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.arrow {
+    display: none;
+}
+
+.center-video {
+    order: -1;
+    flex: none;
+    margin-bottom: 20px;
+}
+
+.video-container {
+    width: 250px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.italian-quote p {
+    font-size: 12px;
+    color: #0A2452 !important;
 }
 
 /* Quote section - Cita italiana debajo */
@@ -1205,7 +1165,7 @@ body.loading-cms-content .footer-bottom {
 /* News Section */
 /* News Section */
 .news-section {
-    padding: 140px 5% 100px 5%;
+    padding: 40px 20px 80px 20px; /* Aumenté el padding inferior de 20px a 80px */
     background: #0A2452;
     position: relative;
     overflow: hidden;
@@ -1305,6 +1265,7 @@ body.loading-cms-content .footer-bottom {
     .footer-links {
         padding: 40px 20px;
         background: #1D1A1A;
+        text-decoration: none;
     }
     
     .footer-grid {
@@ -1313,6 +1274,7 @@ body.loading-cms-content .footer-bottom {
         gap: 10px;
         max-width: 358px;
         margin: 0 auto;
+        text-decoration: none;
     }
     
     .footer-card {
@@ -1335,6 +1297,7 @@ body.loading-cms-content .footer-bottom {
         transform: translateX(-50%);
         z-index: 3;
         font-size: 10px;
+        color: white;
     }
     
     /* Footer bottom móvil */
@@ -1501,7 +1464,7 @@ function startNewsObserver() {
 <header class="header">
     <div class="hero-content">
         <h1 class="hero-title">Una nueva visión de la educación.<br> La Scuola aperta al mondo</h1>
-        <a href="popap.html" class="admissions-btn">Admisiones</a>
+        <a href="popap.php" class="admissions-btn">Admisiones</a>
     </div>
 </header>
 
@@ -1712,61 +1675,61 @@ function startNewsObserver() {
     
     <div class="news-grid">
         <div class="news-card">
-            <img src="https://placehold.co/317x238" alt="Noticia 1">
+            <img src="fotosPrincipales/arcimboldo4.jpg" alt="Noticia 1">
             <div class="news-card-content">
                 <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                <a href="noticiaDestacada1.html" class="news-card-btn">Boton</a>
+                <a href="noticiaDestacada1.html" class="news-card-btn">Ver mas</a>
             </div>
         </div>
         
         <div class="news-card">
-            <img src="https://placehold.co/317x238" alt="Noticia 2">
+            <img src="fotosPrincipales/PrimerDia4.jpg.png" alt="Noticia 2">
             <div class="news-card-content">
                 <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                <a href="#" class="news-card-btn">Boton</a>
+                <a href="noticiaDestacada2.html" class="news-card-btn">Ver mas</a>
             </div>
         </div>
         
         <div class="news-card">
-            <img src="https://placehold.co/317x238" alt="Noticia 3">
+            <img src="fotosPrincipales/Comunidad.jpg" alt="Noticia 3">
             <div class="news-card-content">
                 <p class="news-card-text">Consiste en un gran plan pluridisciplinar pensado, planificado y elaborado por los propios alumnos con la guía de sus docentes, que prevé la construcción y/o recuperación de diferentes espacios, reforestación, huertas orgánicas, etc., en base a principios ecológicos respetuosos del medio ambiente.</p>
-                <a href="#" class="news-card-btn">Boton</a>
+                <a href="noticiaDestacada3.html" class="news-card-btn">Ver mas</a>
             </div>
         </div>
     </div>
 </section>
              <section class="footer-links">
     <div class="footer-grid">
-        <div class="footer-card blue">
-            <img src="https://placehold.co/222x257" alt="Acceso a familia">
+        <a href="acceso-familia.html" class="footer-card blue">
+            <img src="fotosSeccion/familia.jpg" alt="Acceso a familia">
             <div class="footer-card-content">Acceso a<br>familia</div>
-        </div>
+        </a>
         
-        <div class="footer-card red">
-            <img src="https://placehold.co/222x257" alt="Comunidad Exalumnos">
+        <a href="comunidad-exalumnos.html" class="footer-card red">
+            <img src="fotosPrincipales/Comunidad.jpg" alt="Comunidad Exalumnos">
             <div class="footer-card-content">Comunidad<br>Exalumnos</div>
-        </div>
+        </a>
         
-        <div class="footer-card yellow">
-            <img src="https://placehold.co/222x257" alt="Scuola Club">
+        <a href="scuola-club.html" class="footer-card yellow">
+            <img src="fotosSeccion/scuolaClub.png" alt="Scuola Club">
             <div class="footer-card-content">Scuola Club</div>
-        </div>
+        </a>
         
-        <div class="footer-card green">
-            <img src="https://placehold.co/222x257" alt="Noticias">
+        <a href="noticias.html" class="footer-card green">
+            <img src="fotosPrincipales/ejemplo5.jpg" alt="Noticias">
             <div class="footer-card-content">Noticias</div>
-        </div>
+        </a>
         
-        <div class="footer-card dark-blue">
-            <img src="https://placehold.co/222x257" alt="Cursos de idioma">
+        <a href="CursosIdioma.html" class="footer-card dark-blue">
+            <img src="fotosClases/bachillerato3.jpg" alt="Cursos de idioma">
             <div class="footer-card-content">Cursos de<br>idioma</div>
-        </div>
+        </a>
         
-        <div class="footer-card red">
-            <img src="https://placehold.co/222x257" alt="Trabaja con nosotros">
+        <a href="trabaja-con-nosotros.php" class="footer-card red">
+            <img src="fotosSeccion/trabaja.jpg" alt="Trabaja con nosotros">
             <div class="footer-card-content">Trabaja con<br>nosotros</div>
-        </div>
+        </a>
     </div>
 </section>
 

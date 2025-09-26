@@ -305,15 +305,10 @@
       newWin.document.close();
     }
     // Cerrar con transición
-// Cerrar con transición
 document.querySelector('.close-button').addEventListener('click', () => {
   document.body.style.animation = 'slideOutToRight 0.5s ease-in forwards';
   setTimeout(() => {
-    if (document.referrer) {
-      history.back(); // Si hay página anterior, vuelve
-    } else {
-      window.location.href = 'index.html'; // Si no, va al inicio
-    }
+    history.back();
   }, 500);
 });
 
