@@ -1,0 +1,10 @@
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `rol` enum('coordinador','profesor','alumno') NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
